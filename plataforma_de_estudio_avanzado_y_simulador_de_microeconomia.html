@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Class & Simulador Avanzado: Fundamentos de Economía y Microeconomía</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .math-font {
+            font-family: 'Cambria Math', 'Georgia', serif;
+        }
+    </style>
+</head>
+<body class="bg-[#faf8f5] text-slate-800 font-sans antialiased leading-relaxed min-h-screen flex flex-col">
+
+    <!-- Chosen Palette: Warm Editorial Sand & Slate (Background: #faf8f5, Cards: #ffffff, Text: #1e293b, Primary Accent: #0284c7, Secondary: #d97706, Success: #059669) -->
+    <!-- Application Structure Plan:
+         1. Header & Navigation: Persistent top navigation for switching between study modules (Teoría Avanzada, Simulador Gráfico de Restricción/Indiferencia, Calculadora Equimarginal, Banco de Ejercicios Nivel Examen, Cheat-Sheet "Anti-Reprobados").
+         2. Section 1: Deep Theory & Exam Traps (Detailed breakdowns of Unit 1 and Unit 2, featuring interactive accordions for "Trampas de Examen").
+         3. Section 2: Consumer Equilibrium Visual Simulator (Chart.js dynamic plotting of Budget Constraint line, Indifference Curve, and Tangency Point, driven by sliders for Income I, Px, and Py).
+         4. Section 3: Equimarginal Principle Interactive Calculator (Step-by-step consumer decision simulator based on UMg/P matching).
+         5. Section 4: High-Difficulty Exam Exercises (Calculus-based Cobb-Douglas optimization, elasticity traps, budget pivots, step-by-step solutions).
+         6. Section 5: Formula & Axiom Cheat Sheet.
+         This non-linear architecture allows students to alternate between absorbing theoretical rigor and practicing mathematical applications visually. -->
+    <!-- Visualization & Content Choices:
+         - Interactive Consumer Equilibrium Chart -> Chart.js Line Chart with canvas. Plots dynamic linear Budget Constraint and curve U(X,Y) tangency. Justification: Visualizes tangency condition TMS = Px/Py without requiring external heavy graphics. NO SVG.
+         - Interactive Step-by-Step Exercise Calculators -> Custom Vanilla JS functions updating dynamic DOM elements.
+         - Comparative Market Structures Matrix -> Responsive HTML grid styled with Tailwind CSS badges and highlights.
+         NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-sky-600 flex items-center justify-center font-bold text-lg text-white shadow">
+                    µE
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight text-white leading-tight">Master Class & Simulador: Microeconomía</h1>
+                    <p class="text-xs text-sky-400 font-medium">Guía de Estudio Avanzada para Exámenes Exigentes</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Tabs -->
+            <nav class="flex flex-wrap gap-1 text-xs md:text-sm font-medium">
+                <button onclick="switchTab('teoria')" id="tab-teoria" class="tab-btn px-3 py-1.5 rounded-md bg-sky-600 text-white transition">
+                    📖 Teoría y Trampas
+                </button>
+                <button onclick="switchTab('simulador')" id="tab-simulador" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
+                    📊 Graficador de Equilibrio
+                </button>
+                <button onclick="switchTab('equimarginal')" id="tab-equimarginal" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
+                    🧮 Calculador Equimarginal
+                </button>
+                <button onclick="switchTab('ejercicios')" id="tab-ejercicios" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
+                    ⚔️ Ejercicios Resueltos
+                </button>
+                <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
+                    ⚡ Cheat Sheet
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= SECTION 1: TEORÍA AVANZADA ================= -->
+        <section id="sec-teoria" class="tab-content block space-y-8">
+            <!-- Intro Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-sky-950 rounded-2xl p-6 text-white shadow-lg border border-slate-700">
+                <h2 class="text-2xl font-bold text-sky-400 mb-2">Unidad I y II: Dominio Teórico & Análisis Técnico</h2>
+                <p class="text-sm text-slate-300 leading-relaxed max-w-4xl">
+                    Esta sección desglosa minuciosamente cada punto del temario oficial, incorporando el rigor conceptual, las deducciones lógicas y las <strong>preguntas trampa</strong> más recurrentes en exámenes de nivel universitario. Explora los temas desplegables para revisar los fundamentos y los consejos analíticos.
+                </p>
+            </div>
+
+            <!-- Unit I Topics Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Topic 1.1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4">
+                    <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
+                        <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                        <span>1.1 Principios y Fundamentos Económicos</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">La Ciencia Económica, Escasez y Juicios de Valor</h3>
+                    <p class="text-sm text-slate-600">
+                        La economía es la ciencia social que estudia la asignación eficiente de recursos <strong>escasos</strong> para satisfacer necesidades humanas <strong>ilimitadas</strong>.
+                    </p>
+                    
+                    <div class="space-y-3 text-sm">
+                        <div class="bg-stone-50 p-3 rounded-lg border-l-4 border-amber-500">
+                            <strong class="text-slate-900 block">Costo de Oportunidad:</strong>
+                            El valor de la <em>segunda mejor alternativa renunciada</em>. No es la suma de todas las opciones rechazadas, sino exclusivamente el valor del rendimiento de la opción prioritaria no elegida.
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border-l-4 border-sky-500">
+                            <strong class="text-slate-900 block">Positiva vs. Normativa:</strong>
+                            <ul class="list-disc list-inside mt-1 space-y-1 text-slate-700">
+                                <li><strong>Positiva (Lo que ES):</strong> Descriptiva, objetiva, falsable empíricamente. Exenta de valoraciones éticas.</li>
+                                <li><strong>Normativa (Lo que DEBERÍA SER):</strong> Prescriptiva, basada en valores éticos, morales o juicios políticos.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exam Trap Accordion -->
+                    <details class="group border border-amber-200 bg-amber-50/50 rounded-lg p-3 text-sm cursor-pointer">
+                        <summary class="font-bold text-amber-900 flex justify-between items-center">
+                            <span>⚠️ Trampa de Examen: ¿Frase Positiva o Normativa?</span>
+                            <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <p class="mt-2 text-slate-700 text-xs leading-relaxed">
+                            <strong>Premisa típica:</strong> <em>"Un incremento en el salario mínimo provoca desempleo en el sector informal."</em><br>
+                            <strong>Respuesta de 10:</strong> Es una afirmación <strong>Positiva</strong>. Aunque genera polémica social, establece una hipótesis sobre causalidad objetiva que puede ser contrastada o refutada con datos estadísticos reales. No contiene las palabras "debe", "debería" ni valoraciones morales.
+                        </p>
+                    </details>
+                </div>
+
+                <!-- Topic 1.2 & 1.3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4">
+                    <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
+                        <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                        <span>1.2 & 1.3 Sistemas, Modelos y Agentes</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">Sistemas Económicos y la FPP Concava</h3>
+                    <p class="text-sm text-slate-600">
+                        La sociedad responde al <em>¿Qué, Cómo y Para quién producir?</em> mediante economías de Mercado (precios libres), Centralizadas (planificación estatal) o Mixtas.
+                    </p>
+
+                    <div class="bg-stone-50 p-3 rounded-lg border border-stone-200 space-y-2 text-sm">
+                        <strong class="text-slate-900 block">Modelo de la Frontera de Posibilidades de Producción (FPP):</strong>
+                        <p class="text-xs text-slate-700">
+                            Muestra las combinaciones máximas de producción de dos bienes dados los recursos y la tecnología. 
+                            Bajo el supuesto de <em>Ceteris Paribus</em> (todo lo demás constante).
+                        </p>
+                    </div>
+
+                    <details class="group border border-amber-200 bg-amber-50/50 rounded-lg p-3 text-sm cursor-pointer">
+                        <summary class="font-bold text-amber-900 flex justify-between items-center">
+                            <span>⚠️ Trampa de Examen: ¿Por qué la FPP es Cóncava hacia el origen?</span>
+                            <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div class="mt-2 text-slate-700 text-xs leading-relaxed space-y-1">
+                            <p><strong>Causa analítica:</strong> La concavidad refleja la <strong>Ley de Costos de Oportunidad Crecientes</strong>.</p>
+                            <p>Los factores productivos (tierra, trabajo, capital) no son perfectamente adaptables ni homogéneos para la producción de todos los bienes. Al transferir recursos de un bien A a un bien B, se deben sacrificar cantidades cada vez mayores de A por cada unidad adicional de B.</p>
+                        </div>
+                    </details>
+
+                    <!-- Agents List -->
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-sky-50 p-2 rounded border border-sky-100">
+                            <span class="font-bold text-sky-900 block">Hogares (Familias)</span>
+                            Maximizan utilidad. Dueños de factores (L, K, T).
+                        </div>
+                        <div class="bg-sky-50 p-2 rounded border border-sky-100">
+                            <span class="font-bold text-sky-900 block">Empresas</span>
+                            Maximizan beneficios ($\Pi = I - C$). Contratan factores.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Structures Table Section (1.4) -->
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-4">
+                <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                    <span>1.4 Estructuras de Mercado (Competencia Perfecta vs. Imperfecta)</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900">Matriz Comparativa de Mercados</h3>
+                <p class="text-sm text-slate-600">
+                    Estudia las características determinantes de los mercados según el poder de mercado, el control de precios y la naturaleza del producto.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-700 border-collapse">
+                        <thead class="bg-slate-900 text-white font-semibold uppercase tracking-wider text-[11px]">
+                            <tr>
+                                <th class="p-3 rounded-tl-lg">Estructura</th>
+                                <th class="p-3">Nº Vendedores</th>
+                                <th class="p-3">Tipo de Producto</th>
+                                <th class="p-3">Poder sobre Precio</th>
+                                <th class="p-3">Barreras de Entrada</th>
+                                <th class="p-3 rounded-tr-lg">Condición de Beneficio (Largo Plazo)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200 bg-stone-50/50">
+                            <tr class="hover:bg-sky-50/50 transition">
+                                <td class="p-3 font-bold text-sky-900">Competencia Perfecta</td>
+                                <td class="p-3">Atomizado (Muchísimos)</td>
+                                <td class="p-3">Homogéneo (Idéntico)</td>
+                                <td class="p-3">Nulo (Precio-aceptantes)</td>
+                                <td class="p-3">Ninguna</td>
+                                <td class="p-3 font-semibold text-emerald-700">$\Pi = 0$ (Beneficio Económico Nulo)</td>
+                            </tr>
+                            <tr class="hover:bg-sky-50/50 transition">
+                                <td class="p-3 font-bold text-slate-900">Competencia Monopolística</td>
+                                <td class="p-3">Muchos</td>
+                                <td class="p-3">Diferenciado (Marcas, calidad)</td>
+                                <td class="p-3">Limitado (Poder monopólico local)</td>
+                                <td class="p-3">Bajas</td>
+                                <td class="p-3 font-semibold text-emerald-700">$\Pi = 0$ (Debido a la entrada de competidores)</td>
+                            </tr>
+                            <tr class="hover:bg-sky-50/50 transition">
+                                <td class="p-3 font-bold text-amber-900">Oligopolio</td>
+                                <td class="p-3">Pocos (2 a 10 dominantes)</td>
+                                <td class="p-3">Homogéneo o Diferenciado</td>
+                                <td class="p-3">Consignable (Interdependencia estratégica)</td>
+                                <td class="p-3">Altas (Escala, Capital)</td>
+                                <td class="p-3 text-slate-800 font-semibold">$\Pi \ge 0$ (Posibles beneficios extraordinarios)</td>
+                            </tr>
+                            <tr class="hover:bg-sky-50/50 transition">
+                                <td class="p-3 font-bold text-rose-900">Monopolio</td>
+                                <td class="p-3">Uno solo</td>
+                                <td class="p-3">Único sin sustitutos cercanos</td>
+                                <td class="p-3">Total (Fijador de precio)</td>
+                                <td class="p-3">Infranqueables (Patentes, Recursos)</td>
+                                <td class="p-3 text-rose-700 font-semibold">$\Pi > 0$ (Beneficios monopolísticos a LP)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <details class="group border border-amber-200 bg-amber-50/50 rounded-lg p-3 text-sm cursor-pointer">
+                    <summary class="font-bold text-amber-900 flex justify-between items-center">
+                        <span>⚠️ PREGUNTA RIGUROSA: ¿Por qué en Competencia Perfecta $P = IMg = CMg$?</span>
+                        <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="mt-2 text-slate-700 text-xs leading-relaxed space-y-1">
+                        <p>Al ser precio-aceptante, la empresa vende cualquier cantidad al precio dado por el mercado ($P$). Por lo tanto, el ingreso adicional por vender una unidad extra (Ingreso Marginal, $IMg$) es exactamente el precio $P$.</p>
+                        <p>Para maximizar beneficios, cualquier empresa iguala $IMg = CMg$. Como en competencia perfecta $IMg = P$, la condición de optimización se convierte en <strong>$P = CMg$</strong>.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Unit II: Consumer Theory (3.1 & 3.2) -->
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-6">
+                <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                    <span>Unidad II: Microeconomía - Teoría del Consumidor y Productor</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-slate-900">Optimizaciones y Estructura Matemática del Consumidor</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <!-- Axioms Card -->
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
+                        <strong class="text-slate-900 text-base block border-b pb-1 border-stone-300">Axiomas de Preferencia</strong>
+                        <ul class="space-y-1.5 text-xs text-slate-700">
+                            <li><strong>1. Completitud:</strong> El consumidor siempre puede comparar y clasificar cualquier par de cestas: $A \succ B$, $B \succ A$, o $A \sim B$.</li>
+                            <li><strong>2. Transitividad:</strong> Si $A \succ B$ y $B \succ C$, entonces forzosamente $A \succ C$. Evita ciclos ilógicos.</li>
+                            <li><strong>3. No Saciedad (Monotonicidad):</strong> "Más es siempre preferible a menos". Preferencias racionales.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Indifference Curves Card -->
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
+                        <strong class="text-slate-900 text-base block border-b pb-1 border-stone-300">Curvas de Indiferencia (CI)</strong>
+                        <p class="text-xs text-slate-700">Representan conjuntos de combinaciones de bienes $(X, Y)$ que otorgan el mismo nivel de utilidad $U$.</p>
+                        <div class="bg-white p-2 rounded border border-stone-200 text-xs">
+                            <strong class="text-sky-900">Propiedades Fundamentales:</strong>
+                            <ol class="list-decimal list-inside space-y-0.5 text-slate-600 mt-1">
+                                <li>Pendiente negativa (Sustituibilidad).</li>
+                                <li>Convexas al origen (TMS decreciente).</li>
+                                <li><strong>Nunca se cruzan</strong> (Violaría transitividad).</li>
+                                <li>Más alejadas del origen = Mayor Utilidad.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Budget Constraint Card -->
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
+                        <strong class="text-slate-900 text-base block border-b pb-1 border-stone-300">Restricción Presupuestal (RP)</strong>
+                        <p class="text-xs text-slate-700">Delimita el conjunto de cestas alcanzables dado el ingreso $I$ y los precios $P_x, P_y$.</p>
+                        <div class="bg-slate-900 text-white p-2.5 rounded font-mono text-xs text-center">
+                            $I = P_x \cdot X + P_y \cdot Y$
+                        </div>
+                        <p class="text-xs text-slate-600">
+                            Pendiente de la línea presupuestal: <span class="font-bold text-slate-900 font-mono">$-P_x / P_y$</span> (Costo de oportunidad del mercado).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Maximization & Equilibrium Deep Dive -->
+                <div class="bg-sky-50/70 rounded-xl p-5 border border-sky-200 space-y-3">
+                    <h4 class="text-lg font-bold text-sky-950 flex items-center space-x-2">
+                        <span>🎯 El Equilibrio del Consumidor: Condición de Tangencia</span>
+                    </h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        El equilibrio se alcanza exactamente en el punto de tangencia donde la pendiente de la Curva de Indiferencia (Tasa Marginal de Sustitución, $TMS$) se iguala a la pendiente de la Restricción Presupuestal (Relación de Precios de Mercado).
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white p-4 rounded-lg border border-sky-200 text-xs md:text-sm">
+                        <div>
+                            <span class="font-bold text-sky-900 block mb-1">Ecuación de Tangencia:</span>
+                            <div class="bg-slate-100 p-2 rounded text-center font-mono font-bold text-slate-900">
+                                $TMS_{x,y} = \frac{UMg_x}{UMg_y} = \frac{P_x}{P_y}$
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-bold text-sky-900 block mb-1">Principio de Equimarginalidad:</span>
+                            <div class="bg-slate-100 p-2 rounded text-center font-mono font-bold text-slate-900">
+                                $\frac{UMg_x}{P_x} = \frac{UMg_y}{P_y}$
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600">
+                        <em>Interpretación de Examen:</em> El consumidor iguala la satisfacción adicional ($UMg$) obtenida por cada peso gastado en el bien $X$ con la satisfacción adicional por peso gastado en el bien $Y$.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 2: GRAFICADOR DE EQUILIBRIO ================= -->
+        <section id="sec-simulador" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Graficador Interactivo del Equilibrio del Consumidor</h2>
+                    <p class="text-sm text-slate-600">
+                        Modifica el Ingreso ($I$) y los Precios ($P_x, P_y$) para observar en tiempo real cómo rota o se desplaza la línea de Restricción Presupuestal y cómo el consumidor alcanza la curva de indiferencia máxima para la función Cobb-Douglas $U(X,Y) = X \cdot Y$.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    
+                    <!-- Controls Panel -->
+                    <div class="lg:col-span-4 bg-stone-50 p-5 rounded-xl border border-stone-200 space-y-5">
+                        <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wide border-b pb-2 border-stone-300">
+                            Parámetros del Consumidor
+                        </h3>
+
+                        <!-- Slider Ingreso -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <label for="slider-I" class="text-slate-700">Ingreso Total ($I$):</label>
+                                <span id="val-I" class="text-sky-700 font-mono font-bold">$120</span>
+                            </div>
+                            <input type="range" id="slider-I" min="40" max="300" step="10" value="120" class="w-full accent-sky-600 cursor-pointer">
+                        </div>
+
+                        <!-- Slider Px -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <label for="slider-Px" class="text-slate-700">Precio de X ($P_x$):</label>
+                                <span id="val-Px" class="text-sky-700 font-mono font-bold">$4</span>
+                            </div>
+                            <input type="range" id="slider-Px" min="1" max="20" step="1" value="4" class="w-full accent-sky-600 cursor-pointer">
+                        </div>
+
+                        <!-- Slider Py -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <label for="slider-Py" class="text-slate-700">Precio de Y ($P_y$):</label>
+                                <span id="val-Py" class="text-sky-700 font-mono font-bold">$6</span>
+                            </div>
+                            <input type="range" id="slider-Py" min="1" max="20" step="1" value="6" class="w-full accent-sky-600 cursor-pointer">
+                        </div>
+
+                        <!-- Calculated Results Output -->
+                        <div class="bg-white p-4 rounded-lg border border-stone-300 space-y-2 text-xs font-mono">
+                            <div class="text-slate-900 font-bold border-b pb-1 font-sans">Valores Calculados en Óptimo:</div>
+                            <div class="flex justify-between text-slate-700">
+                                <span>Cantidad Óptima $X^*$:</span>
+                                <span id="res-Xstar" class="font-bold text-sky-700">15.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-700">
+                                <span>Cantidad Óptima $Y^*$:</span>
+                                <span id="res-Ystar" class="font-bold text-sky-700">10.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-700">
+                                <span>Utilidad Máxima ($U^*$):</span>
+                                <span id="res-Ustar" class="font-bold text-emerald-700">150.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-700">
+                                <span>Pendiente RP ($-P_x/P_y$):</span>
+                                <span id="res-slope" class="font-bold text-amber-700">-0.67</span>
+                            </div>
+                        </div>
+
+                        <div class="text-[11px] text-slate-500 bg-amber-50 p-2.5 rounded border border-amber-200">
+                            <strong>Nota Teórica:</strong> Para la función $U = X \cdot Y$, la regla del consumidor asigna exactamente el 50% de su presupuesto al bien $X$ ($X^* = I / 2P_x$) y el 50% al bien $Y$ ($Y^* = I / 2P_y$).
+                        </div>
+                    </div>
+
+                    <!-- Canvas Container -->
+                    <div class="lg:col-span-8 bg-white p-4 rounded-xl border border-stone-200 shadow-inner">
+                        <div class="chart-container">
+                            <canvas id="consumerChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-slate-500 mt-2">
+                            Gráfica 2D: Restricción Presupuestal (Línea recta azul) vs Curva de Indiferencia Tangente (Curva verde). El punto óptimo coincide con la tangencia exacta.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 3: CALCULADOR EQUIMARGINAL ================= -->
+        <section id="sec-equimarginal" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-5">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Calculadora del Principio Equimarginal</h2>
+                    <p class="text-sm text-slate-600">
+                        Simula cómo un consumidor racional maximiza su utilidad total gastando su dinero peso a peso según el ratio de Utilidad Marginal por Precio ($\frac{UMg}{P}$).
+                    </p>
+                </div>
+
+                <!-- Step-by-step Interactive Table -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-sm">Tabla de Utilidad Marginal (Valores del Problema)</h3>
+                        <p class="text-xs text-slate-600">
+                            Supongamos un Presupuesto de <strong>$60</strong>. Bien X (Tacos) = <strong>$15</strong> cada uno. Bien Y (Refrescos) = <strong>$10</strong> cada uno.
+                        </p>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-center border-collapse">
+                                <thead class="bg-slate-800 text-white font-semibold">
+                                    <tr>
+                                        <th class="p-2 border">Unidad (Q)</th>
+                                        <th class="p-2 border">UMg Tacos ($P_x=15$)</th>
+                                        <th class="p-2 border">UMg/Px (Ratio)</th>
+                                        <th class="p-2 border">UMg Refrescos ($P_y=10$)</th>
+                                        <th class="p-2 border">UMg/Py (Ratio)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-stone-200 font-mono bg-white text-slate-800">
+                                    <tr>
+                                        <td class="p-2 font-bold bg-stone-100">1</td>
+                                        <td class="p-2">60</td>
+                                        <td class="p-2 font-bold text-sky-700 bg-sky-50">4.0</td>
+                                        <td class="p-2">50</td>
+                                        <td class="p-2 font-bold text-emerald-700 bg-emerald-50">5.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold bg-stone-100">2</td>
+                                        <td class="p-2">45</td>
+                                        <td class="p-2 font-bold text-sky-700 bg-sky-50">3.0</td>
+                                        <td class="p-2">40</td>
+                                        <td class="p-2 font-bold text-emerald-700 bg-emerald-50">4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold bg-stone-100">3</td>
+                                        <td class="p-2">30</td>
+                                        <td class="p-2 font-bold text-sky-700 bg-sky-50">2.0</td>
+                                        <td class="p-2">30</td>
+                                        <td class="p-2 font-bold text-emerald-700 bg-emerald-50">3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold bg-stone-100">4</td>
+                                        <td class="p-2">15</td>
+                                        <td class="p-2 font-bold text-sky-700 bg-sky-50">1.0</td>
+                                        <td class="p-2">20</td>
+                                        <td class="p-2 font-bold text-emerald-700 bg-emerald-50">2.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Process breakdown -->
+                    <div class="bg-slate-900 text-white p-5 rounded-xl shadow-md space-y-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-sky-400 border-b border-slate-700 pb-2">Secuencia Óptima de Compra Paso a Paso:</h3>
+                            <ol class="list-decimal list-inside space-y-2 mt-3 text-xs text-slate-300">
+                                <li><strong>Paso 1:</strong> Compara el ratio inicial: Refresco 1º le da ratio 5.0 vs Taco 1º ratio 4.0. <br><span class="text-emerald-400">-> Compra 1º Refresco ($10 gastados, restan $50).</span></li>
+                                <li><strong>Paso 2:</strong> Compara Taco 1º (ratio 4.0) vs Refresco 2º (ratio 4.0). Empate en ratio 4.0.<br><span class="text-emerald-400">-> Compra 1º Taco ($15) + 2º Refresco ($10). (Gasto acum: $35, restan $25).</span></li>
+                                <li><strong>Paso 3:</strong> Compara Taco 2º (ratio 3.0) vs Refresco 3º (ratio 3.0). Empate en ratio 3.0.<br><span class="text-emerald-400">-> Compra 2º Taco ($15) + 3º Refresco ($10). (Gasto acum: $60, Presupuesto agotado).</span></li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-xs">
+                            <span class="text-amber-400 font-bold block">Resultado Final de Maximización:</span>
+                            <p class="text-slate-200">
+                                El consumidor compra <strong>2 Tacos</strong> y <strong>3 Refrescos</strong>.<br>
+                                Condición cumplida: $\frac{UMg_x}{P_x} = \frac{30}{15} = 2.0 = \frac{30}{10} = \frac{UMg_y}{P_y}$.<br>
+                                Presupuesto gastado: $2(15) + 3(10) = 30 + 30 = \$60$.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 4: EJERCICIOS RESUELTOS ================= -->
+        <section id="sec-ejercicios" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Banco de Ejercicios Nivel Examen ("Muerde-Exámenes")</h2>
+                    <p class="text-sm text-slate-600">
+                        Casos aplicados y problemas cuantitativos resueltos con el estándar analítico exigido en evaluaciones de microeconomía.
+                    </p>
+                </div>
+
+                <!-- Exercise 1 -->
+                <div class="border border-stone-200 rounded-xl p-5 space-y-3 bg-stone-50/50">
+                    <div class="flex justify-between items-center">
+                        <span class="bg-slate-900 text-white text-xs px-2.5 py-1 rounded font-bold uppercase">Ejercicio 1: Optimización con Cálculo (Cobb-Douglas)</span>
+                        <span class="text-xs font-semibold text-rose-600">Dificultad: Alta</span>
+                    </div>
+                    <p class="text-sm text-slate-800 font-medium">
+                        Un consumidor posee la función de utilidad $U(X,Y) = X \cdot Y^2$. Los precios de mercado son $P_x = 2$ y $P_y = 4$. Su ingreso total disponible es $I = 120$. Determina las cantidades óptimas $X^*$ y $Y^*$.
+                    </p>
+
+                    <details class="group bg-white border border-stone-300 rounded-lg p-4 text-xs space-y-3 cursor-pointer">
+                        <summary class="font-bold text-sky-700 flex justify-between items-center text-sm">
+                            <span>🔍 Ver Solución Paso a Paso</span>
+                            <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+
+                        <div class="pt-2 border-t border-stone-200 space-y-2 text-slate-700 leading-relaxed font-sans">
+                            <p><strong>Paso 1: Obtenemos las Utilidades Marginales (Derivadas parciales):</strong></p>
+                            <div class="font-mono bg-slate-100 p-2 rounded text-slate-900">
+                                $UMg_x = \frac{\partial U}{\partial X} = Y^2$<br>
+                                $UMg_y = \frac{\partial U}{\partial Y} = 2 X Y$
+                            </div>
+
+                            <p><strong>Paso 2: Aplicamos la Condición de Tangencia ($TMS = \frac{P_x}{P_y}$):</strong></p>
+                            <div class="font-mono bg-slate-100 p-2 rounded text-slate-900">
+                                $\frac{UMg_x}{UMg_y} = \frac{P_x}{P_y} \implies \frac{Y^2}{2 X Y} = \frac{2}{4}$<br>
+                                Simplificando el lado izquierdo: $\frac{Y}{2X} = \frac{1}{2} \implies Y = X$
+                            </div>
+
+                            <p><strong>Paso 3: Sustituimos la relación en la Restricción Presupuestal ($I = P_x X + P_y Y$):</strong></p>
+                            <div class="font-mono bg-slate-100 p-2 rounded text-slate-900">
+                                $120 = 2(X) + 4(Y)$<br>
+                                Como $Y = X$: $120 = 2X + 4X = 6X \implies \mathbf{X^* = 20}$
+                            </div>
+
+                            <p><strong>Paso 4: Calculamos $Y^*$:</strong></p>
+                            <div class="font-mono bg-slate-100 p-2 rounded text-slate-900">
+                                Como $Y = X \implies \mathbf{Y^* = 20}$
+                            </div>
+                            <p class="text-emerald-700 font-bold">Respuesta Final: El punto óptimo de consumo es $(X^*=20, Y^*=20)$. Gasto total: $2(20)+4(20) = 40+80=120$.</p>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Exercise 2 -->
+                <div class="border border-stone-200 rounded-xl p-5 space-y-3 bg-stone-50/50">
+                    <div class="flex justify-between items-center">
+                        <span class="bg-slate-900 text-white text-xs px-2.5 py-1 rounded font-bold uppercase">Ejercicio 2: Demanda del Monopolista e Elasticidad</span>
+                        <span class="text-xs font-semibold text-amber-600">Dificultad: Media-Alta</span>
+                    </div>
+                    <p class="text-sm text-slate-800 font-medium">
+                        ¿Por qué un monopolista racional NUNCA elegirá operar en el tramo inelástico de la curva de demanda? Justifica analíticamente con la relación entre Ingreso Marginal y Elasticidad.
+                    </p>
+
+                    <details class="group bg-white border border-stone-300 rounded-lg p-4 text-xs space-y-3 cursor-pointer">
+                        <summary class="font-bold text-sky-700 flex justify-between items-center text-sm">
+                            <span>🔍 Ver Justificación de Examen</span>
+                            <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+
+                        <div class="pt-2 border-t border-stone-200 space-y-2 text-slate-700 leading-relaxed font-sans">
+                            <p><strong>Respuesta de 10 Puntos:</strong></p>
+                            <p>La relación entre el Ingreso Marginal ($IMg$) y la elasticidad precio de la demanda ($\epsilon_p$) se expresa mediante la fórmula de Amoroso-Robinson:</p>
+                            <div class="font-mono bg-slate-100 p-2 rounded text-slate-900 text-center">
+                                $IMg = P \cdot \left(1 - \frac{1}{|\epsilon_p|}\right)$
+                            </div>
+                            <ul class="list-disc list-inside space-y-1 text-slate-700">
+                                <li>Si la demanda es <strong>inelástica</strong> ($|\epsilon_p| < 1$), el término $\frac{1}{|\epsilon_p|} > 1$, por lo que el <strong>$IMg$ se vuelve NEGATIVO</strong>.</li>
+                                <li>Para maximizar beneficios, la empresa iguala $IMg = CMg$. Dado que el Costo Marginal ($CMg$) siempre es positivo ($CMg \ge 0$), el $IMg$ también DEBE ser positivo.</li>
+                            </ul>
+                            <p class="text-rose-700 font-bold">Conclusión: Un monopolista maximizador siempre operará exclusivamente en la zona ELÁSTICA ($|\epsilon_p| > 1$) de la demanda, donde el $IMg > 0$.</p>
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 5: CHEAT SHEET ================= -->
+        <section id="sec-cheatsheet" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Cheat Sheet & Formulario Anti-Reprobados</h2>
+                    <p class="text-sm text-slate-600">
+                        Resumen compacto de fórmulas esenciales y principios teóricos para repasar 15 minutos antes del examen.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                    
+                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
+                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Restricción Presupuestal</span>
+                        <p class="font-mono text-amber-300 text-sm">$I = P_x X + P_y Y$</p>
+                        <ul class="space-y-1 text-slate-300">
+                            <li>• Intercepto X: $I / P_x$</li>
+                            <li>• Intercepto Y: $I / P_y$</li>
+                            <li>• Pendiente: $-P_x / P_y$</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
+                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Tangencia / Equilibrio</span>
+                        <p class="font-mono text-amber-300 text-sm">$TMS_{x,y} = \frac{UMg_x}{UMg_y} = \frac{P_x}{P_y}$</p>
+                        <p class="font-mono text-emerald-400 text-xs font-bold">$\frac{UMg_x}{P_x} = \frac{UMg_y}{P_y}$</p>
+                        <p class="text-slate-300">Igualación de utilidad marginal por peso gastado.</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
+                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Cobb-Douglas Standard</span>
+                        <p class="font-mono text-amber-300 text-xs">$U(X,Y) = X^\alpha Y^\beta$</p>
+                        <ul class="space-y-1 text-slate-300">
+                            <li>• $X^* = \frac{\alpha}{\alpha + \beta} \cdot \frac{I}{P_x}$</li>
+                            <li>• $Y^* = \frac{\beta}{\alpha + \beta} \cdot \frac{I}{P_y}$</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
+                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Competencia Perfecta</span>
+                        <p class="font-mono text-emerald-400 text-sm">$P = IMed = IMg = CMg$</p>
+                        <p class="text-slate-300">A Largo Plazo: Beneficio Económico $\Pi = 0$ (Precio igual al mínimo del Costo Total Medio).</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
+                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Monopolio</span>
+                        <p class="font-mono text-amber-300 text-sm">Maximización: $IMg = CMg$</p>
+                        <p class="text-slate-300">Regla del Marcado (Markup): $P > CMg$. Opera donde $|\epsilon_p| > 1$.</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
+                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Ley de Rendimientos</span>
+                        <p class="text-slate-300 leading-relaxed">
+                            A corto plazo (con capital fijo $K$), añadir más factor variable ($L$) incrementa la producción total a ritmo decreciente ($PMg_L$ cae).
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-5 border-t border-slate-800 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            Plataforma de Estudio Intensivo para Microeconomía y Fundamentos de Economía • Diseñado para Estudiantes Universitarios
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Tab Switch Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-sky-600', 'text-white');
+                btn.classList.add('hover:bg-slate-800', 'text-slate-300');
+            });
+
+            document.getElementById('sec-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('bg-sky-600', 'text-white');
+            activeBtn.classList.remove('hover:bg-slate-800', 'text-slate-300');
+
+            if(tabId === 'simulador' && !chartInstance) {
+                initChart();
+            }
+        }
+
+        // Chart.js Consumer Equilibrium Simulator
+        let chartInstance = null;
+
+        function calculateOptimum(I, Px, Py) {
+            // For U = X * Y, expenditure share is 50% for each
+            const Xstar = I / (2 * Px);
+            const Ystar = I / (2 * Py);
+            const Ustar = Xstar * Ystar;
+            const slope = -(Px / Py);
+            return { Xstar, Ystar, Ustar, slope };
+        }
+
+        function generateChartData(I, Px, Py) {
+            const { Xstar, Ystar, Ustar } = calculateOptimum(I, Px, Py);
+            const maxX = Math.ceil(I / Px) + 5;
+            
+            // Budget Constraint Points: Y = (I - Px*X) / Py
+            const budgetPoints = [];
+            const budgetMaxX = I / Px;
+            for (let x = 0; x <= budgetMaxX; x += 0.5) {
+                const y = (I - Px * x) / Py;
+                if (y >= 0) {
+                    budgetPoints.push({ x: x, y: y });
+                }
+            }
+
+            // Indifference Curve Points for Ustar: Y = Ustar / X
+            const icPoints = [];
+            const startX = Math.max(0.5, Xstar * 0.2);
+            const endX = Math.min(maxX, Xstar * 2.5);
+            for (let x = startX; x <= endX; x += 0.5) {
+                const y = Ustar / x;
+                if (y <= (I / Py) * 1.8) {
+                    icPoints.push({ x: x, y: y });
+                }
+            }
+
+            return {
+                budgetPoints,
+                icPoints,
+                tangentPoint: [{ x: Xstar, y: Ystar }]
+            };
+        }
+
+        function updateSimulation() {
+            const I = parseFloat(document.getElementById('slider-I').value);
+            const Px = parseFloat(document.getElementById('slider-Px').value);
+            const Py = parseFloat(document.getElementById('slider-Py').value);
+
+            // Update Labels
+            document.getElementById('val-I').textContent = '$' + I;
+            document.getElementById('val-Px').textContent = '$' + Px;
+            document.getElementById('val-Py').textContent = '$' + Py;
+
+            const { Xstar, Ystar, Ustar, slope } = calculateOptimum(I, Px, Py);
+
+            document.getElementById('res-Xstar').textContent = Xstar.toFixed(2);
+            document.getElementById('res-Ystar').textContent = Ystar.toFixed(2);
+            document.getElementById('res-Ustar').textContent = Ustar.toFixed(2);
+            document.getElementById('res-slope').textContent = slope.toFixed(2);
+
+            if (chartInstance) {
+                const data = generateChartData(I, Px, Py);
+                chartInstance.data.datasets[0].data = data.budgetPoints;
+                chartInstance.data.datasets[1].data = data.icPoints;
+                chartInstance.data.datasets[2].data = data.tangentPoint;
+                chartInstance.update();
+            }
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('consumerChart').getContext('2d');
+            const I = parseFloat(document.getElementById('slider-I').value);
+            const Px = parseFloat(document.getElementById('slider-Px').value);
+            const Py = parseFloat(document.getElementById('slider-Py').value);
+
+            const initialData = generateChartData(I, Px, Py);
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Restricción Presupuestal (RP)',
+                            data: initialData.budgetPoints,
+                            borderColor: '#0284c7', // Sky 600
+                            borderWidth: 3,
+                            fill: false,
+                            pointRadius: 0,
+                            tension: 0
+                        },
+                        {
+                            label: 'Curva de Indiferencia (U*)',
+                            data: initialData.icPoints,
+                            borderColor: '#059669', // Emerald 600
+                            borderWidth: 3,
+                            fill: false,
+                            pointRadius: 0,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Punto de Equilibrio (Optimo)',
+                            data: initialData.tangentPoint,
+                            backgroundColor: '#d97706', // Amber 600
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            showLine: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Cantidad de Bien X',
+                                font: { weight: 'bold' }
+                            },
+                            min: 0
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Cantidad de Bien Y',
+                                font: { weight: 'bold' }
+                            },
+                            min: 0
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: (${context.parsed.x.toFixed(2)}, ${context.parsed.y.toFixed(2)})`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Event Listeners for Sliders
+        document.getElementById('slider-I').addEventListener('input', updateSimulation);
+        document.getElementById('slider-Px').addEventListener('input', updateSimulation);
+        document.getElementById('slider-Py').addEventListener('input', updateSimulation);
+
+        // Render MathJax/Latex static representations fallback gracefully
+        window.addEventListener('DOMContentLoaded', () => {
+            updateSimulation();
+        });
+    </script>
+</body>
+</html>
