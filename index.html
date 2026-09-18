@@ -41,6 +41,7 @@
             
             <nav class="flex overflow-x-auto no-scrollbar gap-1 text-xs md:text-sm font-medium pb-1 md:pb-0">
                 <button onclick="switchTab('teoria')" id="tab-teoria" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md bg-sky-600 text-white transition">Teoría y Trampas</button>
+                <button onclick="switchTab('deepdive')" id="tab-deepdive" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">Temario Completo</button>
                 <button onclick="switchTab('simulador')" id="tab-simulador" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">Graficador</button>
                 <button onclick="switchTab('equimarginal')" id="tab-equimarginal" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">Equimarginal</button>
                 <button onclick="switchTab('ejercicios')" id="tab-ejercicios" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">Ejercicios</button>
@@ -229,6 +230,437 @@
             </div>
         </section>
 
+
+        <!-- ================= SECTION 1B: TEMARIO COMPLETO / DEEP DIVE ================= -->
+        <section id="sec-deepdive" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-sky-950 rounded-2xl p-6 text-white shadow-lg border border-slate-700">
+                <div class="text-xs uppercase tracking-[0.2em] text-sky-400 font-bold mb-2">Temario completo • Deep Dive</div>
+                <h2 class="text-3xl font-black tracking-tight">Microeconomía: fundamentos, consumidor y productor</h2>
+                <p class="mt-3 text-slate-300 max-w-5xl leading-relaxed">
+                    Esta sección amplía la teoría original para cubrir de forma detallada el contenido del temario:
+                    ciencia económica, sistemas y modelos, campo de la economía, mercado y estructuras,
+                    comportamiento del consumidor, producción, costos y equilibrio del productor.
+                    Está pensada para estudiar, resolver ejercicios y detectar trampas conceptuales.
+                </p>
+            </div>
+
+            <!-- UNIDAD I -->
+            <div class="space-y-5">
+                <div class="flex items-end justify-between gap-4">
+                    <div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-sky-600">Unidad temática I</div>
+                        <h3 class="text-2xl font-black text-slate-900">Fundamentos Económicos</h3>
+                    </div>
+                    <span class="hidden sm:block text-xs font-semibold text-slate-400">Escasez → elección → mercado</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-4">
+                        <h4 class="text-xl font-extrabold text-sky-800">1.1 Importancia y principios de la economía</h4>
+                        <div class="bg-sky-50 border-l-4 border-sky-600 p-4 rounded-r-lg">
+                            <p class="text-sm text-slate-700"><strong>Idea central:</strong> la economía estudia cómo asignar recursos escasos entre usos alternativos para satisfacer necesidades y deseos que, frente a esos recursos, son ilimitados.</p>
+                        </div>
+
+                        <h5 class="font-bold text-slate-900">1.1.1 La ciencia económica y su importancia</h5>
+                        <p class="text-sm text-slate-700">
+                            El núcleo del problema económico es la <strong>escasez</strong>. Tierra, trabajo, capital,
+                            tiempo, conocimientos, materias primas y capacidad productiva son limitados. Por eso
+                            individuos, empresas y gobiernos deben elegir. La economía analiza esas elecciones y sus consecuencias.
+                        </p>
+                        <ul class="text-sm text-slate-700 list-disc ml-5 space-y-2">
+                            <li><strong>Escasez:</strong> los recursos disponibles no alcanzan para satisfacer todos los usos posibles simultáneamente.</li>
+                            <li><strong>Elección:</strong> seleccionar una alternativa implica renunciar a otras.</li>
+                            <li><strong>Costo de oportunidad:</strong> valor de la mejor alternativa a la que se renuncia.</li>
+                            <li><strong>Eficiencia:</strong> utilizar los recursos de manera que no se pueda aumentar una producción sin sacrificar otra cuando los recursos están plenamente empleados.</li>
+                        </ul>
+
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm">
+                            <strong class="text-amber-900">⚠️ Trampa:</strong>
+                            el costo de oportunidad <strong>no</strong> es la suma de todas las alternativas rechazadas;
+                            es el valor de la <strong>mejor alternativa específica</strong>.
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-4">
+                        <h4 class="text-xl font-extrabold text-sky-800">1.1.2 Economía positiva y normativa</h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                                <div class="font-black text-emerald-800">POSITIVA • “Lo que es”</div>
+                                <p class="text-sm mt-2 text-slate-700">
+                                    Describe relaciones económicas que pueden contrastarse con evidencia. Una afirmación positiva
+                                    puede ser verdadera o falsa y puede someterse a comprobación.
+                                </p>
+                                <p class="text-xs mt-3 text-slate-600"><strong>Ejemplo:</strong> “Un aumento del 10% en el salario mínimo elevó el desempleo un 2%”.</p>
+                            </div>
+                            <div class="bg-rose-50 border border-rose-200 rounded-lg p-4">
+                                <div class="font-black text-rose-800">NORMATIVA • “Lo que debería ser”</div>
+                                <p class="text-sm mt-2 text-slate-700">
+                                    Incorpora juicios de valor, criterios éticos o preferencias sobre cómo debería funcionar la economía.
+                                </p>
+                                <p class="text-xs mt-3 text-slate-600"><strong>Ejemplo:</strong> “El gobierno debe subir los impuestos a los ricos por justicia social”.</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-700">
+                            <strong>Palabras que alertan:</strong> “debe”, “debería”, “justo”, “mejor”, “injusto”, “conviene”.
+                            Ojo: una frase con “debe” suele ser normativa, pero la clasificación depende del contenido completo.
+                        </div>
+                    </article>
+                </div>
+
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-5">
+                    <h4 class="text-xl font-extrabold text-sky-800">1.1.3 Las preguntas básicas de la economía: ¿qué, cómo y para quién producir?</h4>
+                    <div class="grid md:grid-cols-3 gap-5">
+                        <div class="rounded-xl border border-sky-100 bg-sky-50/60 p-5">
+                            <div class="text-xs font-black uppercase tracking-wider text-sky-600">01</div>
+                            <h5 class="font-black text-lg text-slate-900 mt-1">¿Qué producir?</h5>
+                            <p class="text-sm text-slate-700 mt-2">Decidir qué bienes y servicios se producirán y en qué cantidades. En un mercado, los precios y las preferencias actúan como señales para orientar recursos hacia usos con mayor demanda.</p>
+                        </div>
+                        <div class="rounded-xl border border-sky-100 bg-sky-50/60 p-5">
+                            <div class="text-xs font-black uppercase tracking-wider text-sky-600">02</div>
+                            <h5 class="font-black text-lg text-slate-900 mt-1">¿Cómo producir?</h5>
+                            <p class="text-sm text-slate-700 mt-2">Elegir la combinación de factores y tecnología. El problema puede expresarse como una minimización de costos para alcanzar una cantidad determinada de producción.</p>
+                        </div>
+                        <div class="rounded-xl border border-sky-100 bg-sky-50/60 p-5">
+                            <div class="text-xs font-black uppercase tracking-wider text-sky-600">03</div>
+                            <h5 class="font-black text-lg text-slate-900 mt-1">¿Para quién producir?</h5>
+                            <p class="text-sm text-slate-700 mt-2">Determinar quién recibe los bienes y servicios. En una economía de mercado está relacionado con la distribución del ingreso y con la propiedad de los factores productivos.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-5">
+                    <h4 class="text-xl font-extrabold text-sky-800">1.2 Sistemas y modelos económicos</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="font-bold text-slate-900 mb-3">1.2.1 Sistemas económicos</h5>
+                            <div class="space-y-3 text-sm">
+                                <div class="border-l-4 border-sky-500 pl-4"><strong>Economía de mercado:</strong> decisiones descentralizadas; precios y mercados coordinan gran parte de la asignación.</div>
+                                <div class="border-l-4 border-amber-500 pl-4"><strong>Economía de mando:</strong> un planificador central toma decisiones importantes sobre asignación y producción.</div>
+                                <div class="border-l-4 border-emerald-500 pl-4"><strong>Economía mixta:</strong> combina mecanismos de mercado con intervención del Estado.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-slate-900 mb-3">1.2.2 Modelos económicos</h5>
+                            <p class="text-sm text-slate-700">
+                                Un modelo es una representación simplificada de una realidad económica. Su utilidad no está en copiar
+                                todos los detalles del mundo, sino en aislar relaciones importantes para analizarlas.
+                            </p>
+                            <div class="bg-slate-900 text-white rounded-lg p-4 mt-3 font-mono text-xs">
+                                Modelo → supuestos → relación económica → predicción/análisis
+                            </div>
+                            <p class="text-xs text-slate-500 mt-3"><strong>Ceteris paribus:</strong> “manteniendo constantes las demás condiciones”; permite estudiar el efecto de una variable aislada.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-5">
+                    <h4 class="text-xl font-extrabold text-sky-800">1.3 Campo de la economía</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="rounded-xl bg-stone-50 p-5 border border-stone-200">
+                            <h5 class="font-black text-lg text-slate-900">1.3.1 Microeconomía</h5>
+                            <p class="text-sm text-slate-700 mt-2">Estudia decisiones y comportamiento de consumidores, empresas y mercados particulares.</p>
+                            <ul class="mt-3 text-sm list-disc ml-5 space-y-1 text-slate-700">
+                                <li>Precio de un producto.</li>
+                                <li>Decisiones de consumo.</li>
+                                <li>Producción de una empresa.</li>
+                                <li>Costos e incentivos.</li>
+                                <li>Estructuras de mercado.</li>
+                            </ul>
+                        </div>
+                        <div class="rounded-xl bg-stone-50 p-5 border border-stone-200">
+                            <h5 class="font-black text-lg text-slate-900">Macroeconomía</h5>
+                            <p class="text-sm text-slate-700 mt-2">Estudia agregados y fenómenos de la economía en conjunto.</p>
+                            <ul class="mt-3 text-sm list-disc ml-5 space-y-1 text-slate-700">
+                                <li>Inflación.</li>
+                                <li>PIB.</li>
+                                <li>Desempleo.</li>
+                                <li>Crecimiento económico.</li>
+                                <li>Política monetaria y fiscal.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-slate-900 mb-3">1.3.3 Actores económicos y flujo circular de la renta</h5>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <div class="p-4 rounded-lg border border-slate-200"><strong>Familias</strong><p class="text-xs mt-1 text-slate-600">Ofrecen factores productivos y demandan bienes y servicios.</p></div>
+                            <div class="p-4 rounded-lg border border-slate-200"><strong>Empresas</strong><p class="text-xs mt-1 text-slate-600">Demandan factores y producen bienes y servicios.</p></div>
+                            <div class="p-4 rounded-lg border border-slate-200"><strong>Gobierno</strong><p class="text-xs mt-1 text-slate-600">Recauda, gasta, regula y participa en la economía.</p></div>
+                            <div class="p-4 rounded-lg border border-slate-200"><strong>Sector externo</strong><p class="text-xs mt-1 text-slate-600">Relaciona la economía mediante importaciones y exportaciones.</p></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FPP -->
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-5">
+                    <h4 class="text-xl font-extrabold text-sky-800">1.2.2 / FPP — Frontera de Posibilidades de Producción</h4>
+                    <p class="text-sm text-slate-700">
+                        La FPP representa las combinaciones máximas de dos bienes que pueden producirse con recursos y tecnología dados.
+                        Es una forma gráfica de visualizar <strong>escasez, elección, eficiencia y costo de oportunidad</strong>.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4"><strong class="text-emerald-800">Sobre la curva</strong><p class="text-xs mt-2">Eficiencia productiva: no es posible producir más de un bien sin sacrificar otro con los recursos actuales.</p></div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4"><strong class="text-amber-800">Dentro</strong><p class="text-xs mt-2">Recursos desaprovechados o ineficiencia; todavía existe capacidad para aumentar producción.</p></div>
+                        <div class="bg-rose-50 border border-rose-200 rounded-lg p-4"><strong class="text-rose-800">Fuera</strong><p class="text-xs mt-2">Combinación actualmente inalcanzable con los recursos y tecnología dados.</p></div>
+                    </div>
+                    <div class="bg-slate-900 text-white rounded-xl p-5">
+                        <h5 class="font-bold text-sky-400">Tasa Marginal de Transformación (TMT)</h5>
+                        <p class="text-sm text-slate-300 mt-2">La pendiente de la FPP representa cuánto de un bien debe sacrificarse para obtener más del otro.</p>
+                        <div class="text-center text-lg mt-3 font-mono">TMT = − ΔY / ΔX</div>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                        <h5 class="font-black text-amber-900">⚠️ Trampa: ¿por qué suele ser cóncava?</h5>
+                        <p class="text-sm text-slate-700 mt-2">
+                            Por los <strong>costos de oportunidad crecientes</strong>: los factores no son perfectamente adaptables a todos los usos.
+                            Al trasladar recursos especializados de una actividad a otra, cada unidad adicional del segundo bien puede exigir un sacrificio creciente del primero.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- MERCADOS -->
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-5">
+                    <h4 class="text-xl font-extrabold text-sky-800">1.4 El sistema de mercado y su funcionamiento</h4>
+                    <p class="text-sm text-slate-700">
+                        El mercado coordina decisiones mediante precios. El poder de una empresa para influir en el precio depende,
+                        entre otros factores, del número de competidores, diferenciación del producto y barreras de entrada.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-collapse">
+                            <thead class="bg-slate-900 text-white">
+                                <tr><th class="p-3 text-left">Estructura</th><th class="p-3 text-left">Vendedores</th><th class="p-3 text-left">Producto</th><th class="p-3 text-left">Barreras</th><th class="p-3 text-left">Poder de mercado</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr><td class="p-3 font-bold">Competencia perfecta</td><td class="p-3">Muchísimos</td><td class="p-3">Homogéneo</td><td class="p-3">Nulas</td><td class="p-3">Nulo; precio-aceptante</td></tr>
+                                <tr><td class="p-3 font-bold">Competencia monopolística</td><td class="p-3">Muchos</td><td class="p-3">Diferenciado</td><td class="p-3">Bajas</td><td class="p-3">Bajo/medio</td></tr>
+                                <tr><td class="p-3 font-bold">Oligopolio</td><td class="p-3">Pocos</td><td class="p-3">Homogéneo o diferenciado</td><td class="p-3">Altas</td><td class="p-3">Alto; interdependencia estratégica</td></tr>
+                                <tr><td class="p-3 font-bold">Monopolio</td><td class="p-3">Uno</td><td class="p-3">Sin sustitutos cercanos</td><td class="p-3">Muy altas/bloqueadas</td><td class="p-3">Alto; enfrenta demanda de mercado</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-sky-50 rounded-lg p-4 text-sm"><strong>Competencia perfecta:</strong> la empresa individual enfrenta demanda perfectamente elástica; <strong>IMg = P</strong>.</div>
+                        <div class="bg-rose-50 rounded-lg p-4 text-sm"><strong>Monopolio:</strong> enfrenta la demanda del mercado; para vender más debe reducir el precio y, en general, <strong>IMg &lt; P</strong>.</div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- UNIDAD II CONSUMIDOR -->
+            <div class="space-y-5 pt-4">
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-widest text-sky-600">Unidad temática II</div>
+                    <h3 class="text-2xl font-black text-slate-900">Teoría del comportamiento del consumidor y del productor</h3>
+                    <p class="text-sm text-slate-600 mt-2">Competencia: diferenciar las decisiones de consumidores y productores según restricciones, tecnología y costos de corto y largo plazo.</p>
+                </div>
+
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-5">
+                    <h4 class="text-xl font-extrabold text-sky-800">2.1 / 3.1 Comportamiento del consumidor</h4>
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="font-bold">2.1.1 Gustos y preferencias</h5>
+                            <p class="text-sm text-slate-700 mt-2">Las preferencias representan cómo el consumidor ordena diferentes cestas de bienes.</p>
+                            <ul class="text-sm text-slate-700 list-disc ml-5 mt-3 space-y-2">
+                                <li><strong>Completitud:</strong> puede comparar dos cestas A y B: A ≻ B, B ≻ A o A ∼ B.</li>
+                                <li><strong>Transitividad:</strong> si A ≻ B y B ≻ C, entonces A ≻ C.</li>
+                                <li><strong>No saciedad / monotonicidad:</strong> bajo el supuesto habitual, una cesta con más bienes es preferida a otra con menos, manteniendo lo demás constante.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-bold">2.1.2 Utilidad y superficie de utilidad</h5>
+                            <p class="text-sm text-slate-700 mt-2">
+                                La función de utilidad <strong>U(X,Y)</strong> asigna un nivel numérico a las cestas para representar el orden de preferencias.
+                                Una representación común es la Cobb-Douglas:
+                            </p>
+                            <div class="bg-slate-900 text-white rounded-lg p-4 text-center font-mono mt-3">U(X,Y) = X<sup>α</sup>Y<sup>β</sup></div>
+                            <p class="text-xs text-slate-500 mt-3">La utilidad es una herramienta de representación: el foco está en el orden de preferencias y en la elección óptima.</p>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold">2.1.3 Curvas de indiferencia y características</h5>
+                        <div class="grid md:grid-cols-3 gap-4 mt-3">
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Pendiente negativa</strong><p class="text-xs mt-2">Con preferencias monotónicas, aumentar X exige reducir Y para permanecer en la misma utilidad.</p></div>
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Convexidad</strong><p class="text-xs mt-2">Se asocia a una TMS decreciente y a la preferencia por combinaciones diversificadas frente a extremos.</p></div>
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>No se cruzan</strong><p class="text-xs mt-2">Si se cruzaran, podrían generarse contradicciones con la transitividad de las preferencias.</p></div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold">2.1.4 Posibilidades de consumo: restricción presupuestal</h5>
+                        <div class="bg-slate-900 text-white rounded-lg p-5 text-center font-mono text-lg">I = P<sub>x</sub>X + P<sub>y</sub>Y</div>
+                        <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm">
+                            <div><strong>Intercepto X:</strong><br>I / P<sub>x</sub></div>
+                            <div><strong>Intercepto Y:</strong><br>I / P<sub>y</sub></div>
+                            <div><strong>Pendiente:</strong><br>−P<sub>x</sub> / P<sub>y</sub></div>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4 text-sm">
+                            <strong>Rotación vs. desplazamiento:</strong> un cambio en el ingreso desplaza paralelamente la recta.
+                            Un cambio en un precio modifica un intercepto y rota la recta sobre el eje cuyo precio no cambió.
+                            <br><br><strong>Trampa mortal:</strong> si ingreso y ambos precios se duplican, la recta presupuestaria no cambia porque el ingreso real y los precios relativos permanecen iguales.
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold">2.1.5 Utilidad total y utilidad marginal</h5>
+                        <div class="grid md:grid-cols-2 gap-4 mt-3">
+                            <div class="p-4 border rounded-lg"><strong>Utilidad total (UT)</strong><p class="text-sm text-slate-700 mt-2">Satisfacción total asociada al consumo de una cantidad determinada.</p></div>
+                            <div class="p-4 border rounded-lg"><strong>Utilidad marginal (UMg)</strong><p class="text-sm text-slate-700 mt-2">Cambio en utilidad producido por una unidad adicional de consumo. En forma continua, es una derivada parcial.</p></div>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-4 mt-4 font-mono text-center">UMg<sub>x</sub> = ∂U / ∂X &nbsp;&nbsp;&nbsp; UMg<sub>y</sub> = ∂U / ∂Y</div>
+                        <p class="text-sm text-slate-700 mt-3"><strong>Ley de utilidad marginal decreciente:</strong> bajo sus supuestos, al aumentar el consumo de un bien, la utilidad adicional de unidades sucesivas tiende a disminuir.</p>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold">2.1.6 Maximización de utilidad y equilibrio del consumidor</h5>
+                        <p class="text-sm text-slate-700 mt-2">El consumidor busca la cesta más preferida que pueda comprar. En una solución interior, el equilibrio aparece en la tangencia entre la curva de indiferencia y la restricción presupuestal.</p>
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-sky-50 rounded-lg p-4 text-center">
+                                <div class="text-xs uppercase font-bold text-sky-700">TMS</div>
+                                <div class="font-mono mt-2">TMS<sub>x,y</sub> = UMg<sub>x</sub> / UMg<sub>y</sub></div>
+                            </div>
+                            <div class="bg-emerald-50 rounded-lg p-4 text-center">
+                                <div class="text-xs uppercase font-bold text-emerald-700">Equimarginal</div>
+                                <div class="font-mono mt-2">UMg<sub>x</sub>/P<sub>x</sub> = UMg<sub>y</sub>/P<sub>y</sub></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 text-white rounded-lg p-5 mt-4">
+                            <h6 class="font-bold text-sky-400">Multiplicador de Lagrange</h6>
+                            <div class="font-mono text-center mt-3">L = U(X,Y) + λ(I − P<sub>x</sub>X − P<sub>y</sub>Y)</div>
+                            <p class="text-xs text-slate-300 mt-3">Las condiciones de primer orden conducen a la igualdad de utilidad marginal por unidad monetaria gastada.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCTOR -->
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-6">
+                    <h4 class="text-xl font-extrabold text-sky-800">2.2 / 3.2 Comportamiento del productor</h4>
+                    <div class="bg-sky-50 border-l-4 border-sky-600 p-4 rounded-r-lg">
+                        <p class="text-sm text-slate-700"><strong>Problema central:</strong> la empresa busca maximizar beneficios, considerando su tecnología, precios de insumos y precio de venta.</p>
+                        <div class="font-mono text-center mt-3">π = IT − CT</div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="font-bold">2.2.1 Importancia de la empresa en el ciclo económico</h5>
+                            <p class="text-sm text-slate-700 mt-2">Las empresas transforman factores productivos en bienes y servicios. Demandan trabajo y capital, pagan ingresos por esos factores y venden producción a consumidores y otros agentes.</p>
+                        </div>
+                        <div>
+                            <h5 class="font-bold">2.2.2 El problema económico de la empresa</h5>
+                            <ul class="text-sm text-slate-700 list-disc ml-5 mt-2 space-y-2">
+                                <li><strong>Restricción tecnológica:</strong> lo que puede producir según su función de producción.</li>
+                                <li><strong>Restricción de mercado:</strong> precios de factores y precio al que puede vender su producción.</li>
+                                <li><strong>Objetivo:</strong> maximizar beneficios o, en determinados problemas, minimizar el costo de una meta de producción.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold text-lg">2.2.3 Producción de corto y largo plazo</h5>
+                        <div class="grid lg:grid-cols-2 gap-5 mt-4">
+                            <div class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+                                <h6 class="font-black text-amber-900">Corto plazo</h6>
+                                <p class="text-sm mt-2">Al menos un factor es fijo. En el ejemplo habitual, el capital K permanece fijo y puede variar el trabajo L.</p>
+                                <ul class="text-sm list-disc ml-5 mt-3 space-y-2">
+                                    <li><strong>Producto marginal del trabajo:</strong> producción adicional asociada a una unidad adicional de trabajo, manteniendo los demás factores constantes.</li>
+                                    <li><strong>Rendimientos marginales decrecientes:</strong> al agregar más trabajo a un factor fijo, llega un punto en que el producto marginal comienza a disminuir.</li>
+                                    <li><strong>Relación con CMg:</strong> cuando el producto marginal del trabajo disminuye, producir unidades adicionales requiere más trabajo, lo que presiona al alza el costo marginal, manteniendo constantes los precios de los factores.</li>
+                                </ul>
+                            </div>
+                            <div class="rounded-xl border border-sky-200 bg-sky-50 p-5">
+                                <h6 class="font-black text-sky-900">Largo plazo</h6>
+                                <p class="text-sm mt-2">Todos los factores productivos son variables; la empresa puede modificar su escala o tamaño de planta.</p>
+                                <ul class="text-sm list-disc ml-5 mt-3 space-y-2">
+                                    <li><strong>Isocuantas:</strong> combinaciones de L y K que producen la misma cantidad Q.</li>
+                                    <li><strong>Rendimientos a escala:</strong> respuesta de Q cuando se multiplican simultáneamente todos los factores.</li>
+                                    <li>Puede existir sustitución entre trabajo y capital dependiendo de la tecnología.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold text-lg">2.2.4 Costos de corto y largo plazo</h5>
+                        <div class="grid md:grid-cols-2 gap-5 mt-4">
+                            <div class="bg-stone-50 border border-stone-200 rounded-xl p-5">
+                                <h6 class="font-black">Corto plazo</h6>
+                                <div class="font-mono text-center bg-white rounded p-3 mt-3">CT = CF + CV</div>
+                                <ul class="text-sm mt-3 list-disc ml-5 space-y-2">
+                                    <li><strong>CF:</strong> costo fijo; no cambia con Q en el corto plazo.</li>
+                                    <li><strong>CV:</strong> costo variable; cambia con Q.</li>
+                                    <li><strong>CT:</strong> costo total.</li>
+                                    <li><strong>CMg:</strong> costo adicional de producir una unidad más.</li>
+                                    <li><strong>CMe:</strong> costo total por unidad.</li>
+                                    <li><strong>CVMe:</strong> costo variable por unidad.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 border border-stone-200 rounded-xl p-5">
+                                <h6 class="font-black">Largo plazo</h6>
+                                <p class="text-sm text-slate-700 mt-2">Todos los factores pueden variar; por ello, la distinción fijo/variable del corto plazo deja de funcionar de la misma manera.</p>
+                                <div class="font-mono text-center bg-white rounded p-3 mt-3">C = wL + rK</div>
+                                <p class="text-xs text-slate-500 mt-3"><strong>w</strong> = precio del trabajo/salario; <strong>r</strong> = precio del capital.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 mt-5">
+                            <h6 class="font-black text-amber-900">⚠️ Curvas de costo y punto de cierre</h6>
+                            <ul class="text-sm text-slate-700 list-disc ml-5 mt-3 space-y-2">
+                                <li>El CMg corta al CMe y al CVMe en sus respectivos puntos mínimos.</li>
+                                <li>Si el precio está por debajo del mínimo del CMe, la empresa tiene pérdidas económicas.</li>
+                                <li>En el corto plazo puede seguir produciendo si el precio cubre el CVMe, porque así contribuye a pagar parte de los costos fijos.</li>
+                                <li>Si el precio cae por debajo del mínimo del CVMe, aparece el <strong>punto de cierre</strong>: producir genera una pérdida mayor que cerrar.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-200 pt-5">
+                        <h5 class="font-bold text-lg">2.2.5 Equilibrio del productor</h5>
+                        <p class="text-sm text-slate-700 mt-2">
+                            Para minimizar el costo de producir una cantidad dada, la empresa busca la combinación de factores
+                            donde una isocuanta sea tangente al isocosto más bajo que puede alcanzar.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-sky-50 rounded-lg p-5 text-center">
+                                <div class="text-xs uppercase font-bold text-sky-700">Isocuanta</div>
+                                <div class="font-mono mt-2">Q = f(K,L)</div>
+                                <p class="text-xs text-slate-600 mt-2">Misma producción.</p>
+                            </div>
+                            <div class="bg-emerald-50 rounded-lg p-5 text-center">
+                                <div class="text-xs uppercase font-bold text-emerald-700">Isocosto</div>
+                                <div class="font-mono mt-2">C = wL + rK</div>
+                                <p class="text-xs text-slate-600 mt-2">Mismo costo.</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 text-white rounded-xl p-5 mt-5">
+                            <div class="text-xs uppercase tracking-wider text-sky-400 font-bold">Condición de tangencia</div>
+                            <div class="text-center font-mono text-lg mt-3">TMST = PMg<sub>L</sub> / PMg<sub>K</sub> = w / r</div>
+                            <div class="text-center font-mono text-lg mt-3">PMg<sub>L</sub>/w = PMg<sub>K</sub>/r</div>
+                            <p class="text-sm text-slate-300 mt-4">
+                                Interpretación: el rendimiento productivo marginal por cada peso gastado en trabajo debe igualar
+                                el rendimiento marginal por cada peso gastado en capital. Si el precio relativo de un factor cambia,
+                                la combinación óptima puede cambiar mediante sustitución de factores.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- MAPA DE TRAMPAS -->
+                <article class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                    <h4 class="text-xl font-extrabold text-sky-800 mb-5">⚠️ Mapa de trampas de examen</h4>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Oportunidad ≠ todas las opciones</strong><p class="mt-1 text-slate-600">Es la mejor alternativa sacrificada.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Positiva ≠ “buena”</strong><p class="mt-1 text-slate-600">Positiva significa descriptiva/comprobable, no favorable.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Normativa ≠ falsa</strong><p class="mt-1 text-slate-600">Es una afirmación con juicio de valor; no se clasifica por ser verdadera o falsa.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>FPP dentro</strong><p class="mt-1 text-slate-600">No significa “óptimo”; representa ineficiencia o recursos ociosos.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Precio vs ingreso</strong><p class="mt-1 text-slate-600">Ingreso desplaza la recta; un precio cambia su pendiente y/o un intercepto.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>CMg y promedios</strong><p class="mt-1 text-slate-600">El marginal cruza al promedio en el mínimo del promedio.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Cierre ≠ punto de equilibrio</strong><p class="mt-1 text-slate-600">El cierre se relaciona con el mínimo del CVMe en corto plazo.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Corto ≠ largo plazo</strong><p class="mt-1 text-slate-600">Corto: al menos un factor fijo. Largo: todos variables.</p></div>
+                        <div class="p-4 rounded-lg bg-amber-50 border border-amber-200"><strong>Isocuanta ≠ isocosto</strong><p class="mt-1 text-slate-600">Una fija producción; la otra fija gasto.</p></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
         <!-- ================= SECTION 2: GRAFICADOR ================= -->
         <section id="sec-simulador" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-4">
@@ -322,13 +754,47 @@
                         </div>
                     </details>
                 </div>
+
+                <div class="border border-stone-200 rounded-xl p-5 space-y-3 bg-stone-50/50">
+                    <div class="flex justify-between items-center">
+                        <span class="bg-slate-900 text-white text-xs px-2.5 py-1 rounded font-bold uppercase">Ejercicio 2: Equilibrio del productor</span>
+                        <span class="text-xs font-semibold text-amber-600">Dificultad: Alta</span>
+                    </div>
+                    <p class="text-sm text-slate-800 font-medium">
+                        Una empresa produce con trabajo L y capital K. En cierto punto tiene PMgL = 20, PMgK = 10,
+                        salario w = 5 y costo del capital r = 2. Determina si la combinación actual minimiza costos.
+                    </p>
+                    <details class="group bg-white border border-stone-300 rounded-lg p-4 text-xs cursor-pointer">
+                        <summary class="font-bold text-sky-700 flex justify-between items-center text-sm">
+                            <span>Ver solución razonada</span><span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div class="pt-4 border-t border-stone-200 space-y-3 text-slate-700">
+                            <p><strong>Paso 1:</strong> calcular el producto marginal por peso.</p>
+                            <div class="font-mono text-center">PMgL/w = 20/5 = 4</div>
+                            <div class="font-mono text-center">PMgK/r = 10/2 = 5</div>
+                            <p><strong>Paso 2:</strong> como 4 ≠ 5, la condición equimarginal no se cumple.</p>
+                            <p><strong>Interpretación:</strong> el capital aporta más producto marginal por peso gastado que el trabajo en esta combinación; la empresa tiene incentivo a modificar la combinación de factores hasta restablecer la igualdad, bajo los supuestos del modelo.</p>
+                        </div>
+                    </details>
+                </div>
             </div>
         </section>
 
         <!-- ================= SECTION 5: CHEAT SHEET ================= -->
         <section id="sec-cheatsheet" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
-                <h2 class="text-2xl font-bold text-slate-900">Formulario</h2>
+                <h2 class="text-2xl font-bold text-slate-900">Formulario + mapa rápido</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Presupuesto</strong><div class="font-mono mt-2">I = PₓX + PᵧY</div><div class="font-mono">pendiente = −Pₓ/Pᵧ</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Equilibrio consumidor</strong><div class="font-mono mt-2">UMgₓ/Pₓ = UMgᵧ/Pᵧ</div><div class="font-mono">TMS = UMgₓ/UMgᵧ</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Utilidad</strong><div class="font-mono mt-2">UMgₓ = ∂U/∂X</div><div class="font-mono">UMgᵧ = ∂U/∂Y</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Beneficio</strong><div class="font-mono mt-2">π = IT − CT</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Costo corto plazo</strong><div class="font-mono mt-2">CT = CF + CV</div><div class="font-mono">CMe = CT/Q</div><div class="font-mono">CVMe = CV/Q</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Isocosto</strong><div class="font-mono mt-2">C = wL + rK</div><div class="font-mono">pendiente = −w/r</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Productor</strong><div class="font-mono mt-2">PMgL/w = PMgK/r</div><div class="font-mono">TMST = PMgL/PMgK = w/r</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>FPP</strong><div class="font-mono mt-2">TMT = −ΔY/ΔX</div></div>
+                    <div class="p-4 bg-stone-50 rounded-lg border"><strong>Cobb-Douglas</strong><div class="font-mono mt-2">U = X<sup>α</sup>Y<sup>β</sup></div></div>
+                </div>
             </div>
         </section>
 
