@@ -21,7 +21,6 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
-        /* Ocultar scrollbar en el nav pero permitir deslizamiento */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -29,7 +28,6 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
         .chart-container {
             position: relative;
             width: 100%;
@@ -44,8 +42,6 @@
                 height: 380px;
             }
         }
-        
-        /* Animación de carga para noticias */
         .pulse {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
@@ -70,7 +66,6 @@
                 </div>
             </div>
             
-            <!-- Navigation Tabs (Scrollable on mobile) -->
             <nav class="flex overflow-x-auto no-scrollbar gap-1 text-xs md:text-sm font-medium pb-1 md:pb-0">
                 <button onclick="switchTab('teoria')" id="tab-teoria" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md bg-sky-600 text-white transition">
                     📖 Teoría y Trampas
@@ -97,7 +92,7 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- ================= SECTION 1: TEORÍA AVANZADA ================= -->
+        <!-- SECTION 1: TEORÍA -->
         <section id="sec-teoria" class="tab-content block space-y-8">
             <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-sky-950 rounded-2xl p-6 text-white shadow-lg border border-slate-700">
                 <h2 class="text-2xl font-bold text-sky-400 mb-2">Unidad I y II: Dominio Teórico & Análisis Técnico</h2>
@@ -106,9 +101,7 @@
                 </p>
             </div>
 
-            <!-- Unit I Topics Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
                 <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4">
                     <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
                         <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
@@ -118,20 +111,6 @@
                     <p class="text-sm text-slate-600">
                         La economía es la ciencia social que estudia la asignación eficiente de recursos <strong>escasos</strong> para satisfacer necesidades humanas <strong>ilimitadas</strong>.
                     </p>
-                    
-                    <div class="space-y-3 text-sm">
-                        <div class="bg-stone-50 p-3 rounded-lg border-l-4 border-amber-500">
-                            <strong class="text-slate-900 block">Costo de Oportunidad:</strong>
-                            El valor de la <em>segunda mejor alternativa renunciada</em>. No es la suma de todas las opciones rechazadas, sino exclusivamente el valor del rendimiento de la opción prioritaria no elegida.
-                        </div>
-                        <div class="bg-stone-50 p-3 rounded-lg border-l-4 border-sky-500">
-                            <strong class="text-slate-900 block">Positiva vs. Normativa:</strong>
-                            <ul class="list-disc list-inside mt-1 space-y-1 text-slate-700">
-                                <li><strong>Positiva (Lo que ES):</strong> Descriptiva, objetiva, falsable empíricamente. Exenta de valoraciones éticas.</li>
-                                <li><strong>Normativa (Lo que DEBERÍA SER):</strong> Prescriptiva, basada en valores éticos o juicios políticos.</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4">
@@ -143,109 +122,17 @@
                     <p class="text-sm text-slate-600">
                         La sociedad responde al <em>¿Qué, Cómo y Para quién producir?</em> mediante economías de Mercado, Centralizadas o Mixtas.
                     </p>
-
-                    <div class="bg-stone-50 p-3 rounded-lg border border-stone-200 space-y-2 text-sm">
-                        <strong class="text-slate-900 block">Frontera de Posibilidades de Producción (FPP):</strong>
-                        <p class="text-xs text-slate-700">
-                            Muestra las combinaciones máximas de producción de dos bienes dados los recursos. 
-                            Bajo el supuesto de <em>Ceteris Paribus</em> (todo lo demás constante).
-                        </p>
-                    </div>
-
-                    <details class="group border border-amber-200 bg-amber-50/50 rounded-lg p-3 text-sm cursor-pointer">
-                        <summary class="font-bold text-amber-900 flex justify-between items-center">
-                            <span>⚠️ Trampa de Examen: ¿Por qué la FPP es Cóncava?</span>
-                            <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
-                        </summary>
-                        <div class="mt-2 text-slate-700 text-xs leading-relaxed space-y-1">
-                            <p><strong>Causa analítica:</strong> Refleja la <strong>Ley de Costos de Oportunidad Crecientes</strong>.</p>
-                            <p>Los factores productivos no son perfectamente adaptables. Al transferir recursos de un bien A a un bien B, se sacrifican cantidades mayores de A por cada unidad de B.</p>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <!-- Unit II: Consumer Theory -->
-            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-6">
-                <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
-                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                    <span>Unidad II: Microeconomía - Teoría del Consumidor</span>
-                </div>
-                
-                <h3 class="text-2xl font-bold text-slate-900">Optimizaciones y Estructura Matemática</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
-                        <strong class="text-slate-900 text-base block border-b pb-1 border-stone-300">Axiomas de Preferencia</strong>
-                        <ul class="space-y-1.5 text-xs text-slate-700">
-                            <li><strong>1. Completitud:</strong> $A \succ B$, $B \succ A$, o $A \sim B$.</li>
-                            <li><strong>2. Transitividad:</strong> Si $A \succ B$ y $B \succ C$, entonces $A \succ C$.</li>
-                            <li><strong>3. No Saciedad:</strong> Más es siempre preferible a menos.</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
-                        <strong class="text-slate-900 text-base block border-b pb-1 border-stone-300">Curvas de Indiferencia (CI)</strong>
-                        <p class="text-xs text-slate-700">Combinaciones $(X, Y)$ con igual utilidad $U$.</p>
-                        <div class="bg-white p-2 rounded border border-stone-200 text-xs">
-                            <ol class="list-decimal list-inside space-y-0.5 text-slate-600">
-                                <li>Pendiente negativa.</li>
-                                <li>Convexas al origen (TMS decreciente).</li>
-                                <li><strong>Nunca se cruzan</strong>.</li>
-                            </ol>
-                        </div>
-                    </div>
-
-                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
-                        <strong class="text-slate-900 text-base block border-b pb-1 border-stone-300">Restricción Presupuestal (RP)</strong>
-                        <p class="text-xs text-slate-700">Conjunto de cestas alcanzables.</p>
-                        <div class="bg-slate-900 text-white p-2.5 rounded font-mono text-xs text-center">
-                            $$I = P_x \cdot X + P_y \cdot Y$$
-                        </div>
-                        <p class="text-xs text-slate-600">
-                            Pendiente: <span class="font-bold text-slate-900">$-P_x / P_y$</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-sky-50/70 rounded-xl p-5 border border-sky-200 space-y-3">
-                    <h4 class="text-lg font-bold text-sky-950">🎯 El Equilibrio del Consumidor: Tangencia</h4>
-                    <p class="text-sm text-slate-700">
-                        El equilibrio se alcanza en el punto donde la pendiente de la Curva de Indiferencia (TMS) se iguala a la pendiente de la Restricción Presupuestal.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white p-4 rounded-lg border border-sky-200">
-                        <div>
-                            <span class="font-bold text-sky-900 block mb-1 text-xs">Ecuación de Tangencia:</span>
-                            <div class="bg-slate-100 p-2 rounded text-center text-slate-900 overflow-x-auto">
-                                $$TMS_{x,y} = \frac{UMg_x}{UMg_y} = \frac{P_x}{P_y}$$
-                            </div>
-                        </div>
-                        <div>
-                            <span class="font-bold text-sky-900 block mb-1 text-xs">Principio de Equimarginalidad:</span>
-                            <div class="bg-slate-100 p-2 rounded text-center text-slate-900 overflow-x-auto">
-                                $$\frac{UMg_x}{P_x} = \frac{UMg_y}{P_y}$$
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================= SECTION 2: GRAFICADOR DE EQUILIBRIO ================= -->
+        <!-- SECTION 2: GRAFICADOR -->
         <section id="sec-simulador" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900">Graficador Interactivo del Equilibrio del Consumidor</h2>
-                    <p class="text-sm text-slate-600">
-                        Modifica el Ingreso ($I$) y los Precios ($P_x, P_y$) para observar en tiempo real cómo rota o se desplaza la línea de RP y cómo se alcanza la curva de indiferencia máxima para $U(X,Y) = X \cdot Y$.
-                    </p>
-                </div>
-
+                <h2 class="text-2xl font-bold text-slate-900">Graficador Interactivo del Equilibrio del Consumidor</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                     <div class="lg:col-span-4 bg-stone-50 p-5 rounded-xl border border-stone-200 space-y-5">
-                        <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wide border-b pb-2 border-stone-300">
-                            Parámetros
-                        </h3>
+                        <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wide border-b pb-2 border-stone-300">Parámetros</h3>
                         <div class="space-y-1">
                             <div class="flex justify-between text-xs font-semibold">
                                 <label for="slider-I" class="text-slate-700">Ingreso ($I$):</label>
@@ -267,15 +154,7 @@
                             </div>
                             <input type="range" id="slider-Py" min="1" max="20" step="1" value="6" class="w-full accent-sky-600 cursor-pointer">
                         </div>
-                        
-                        <div class="bg-white p-4 rounded-lg border border-stone-300 space-y-2 text-xs font-mono">
-                            <div class="text-slate-900 font-bold border-b pb-1 font-sans">Valores en Óptimo:</div>
-                            <div class="flex justify-between"><span>$X^*$:</span><span id="res-Xstar" class="font-bold text-sky-700">15.00</span></div>
-                            <div class="flex justify-between"><span>$Y^*$:</span><span id="res-Ystar" class="font-bold text-sky-700">10.00</span></div>
-                            <div class="flex justify-between"><span>Utilidad $U^*$:</span><span id="res-Ustar" class="font-bold text-emerald-700">150.00</span></div>
-                        </div>
                     </div>
-                    
                     <div class="lg:col-span-8 bg-white p-4 rounded-xl border border-stone-200 shadow-inner">
                         <div class="chart-container">
                             <canvas id="consumerChart"></canvas>
@@ -285,105 +164,42 @@
             </div>
         </section>
 
-        <!-- ================= SECTION 3: CALCULADOR EQUIMARGINAL ================= -->
+        <!-- SECTION 3: EQUIMARGINAL -->
         <section id="sec-equimarginal" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-5">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900">Calculadora del Principio Equimarginal</h2>
-                    <p class="text-sm text-slate-600">
-                        Simula cómo se maximiza la utilidad peso a peso según el ratio $\frac{UMg}{P}$.
-                    </p>
-                </div>
-                <!-- ... Resto del contenido original de la tabla ... -->
-                <div class="bg-slate-900 text-white p-5 rounded-xl shadow-md space-y-4">
-                    <h3 class="text-lg font-bold text-sky-400 border-b border-slate-700 pb-2">Secuencia Óptima de Compra</h3>
-                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-xs">
-                        <p class="text-slate-200">
-                            Condición cumplida: $$\frac{UMg_x}{P_x} = \frac{30}{15} = 2.0 = \frac{30}{10} = \frac{UMg_y}{P_y}$$
-                        </p>
-                    </div>
-                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Calculadora del Principio Equimarginal</h2>
+                <p class="text-sm text-slate-600">Simula cómo se maximiza la utilidad peso a peso.</p>
             </div>
         </section>
 
-        <!-- ================= SECTION 4: EJERCICIOS RESUELTOS ================= -->
+        <!-- SECTION 4: EJERCICIOS -->
         <section id="sec-ejercicios" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Banco de Ejercicios Nivel Examen</h2>
-                
-                <div class="border border-stone-200 rounded-xl p-5 space-y-3 bg-stone-50/50">
-                    <div class="flex justify-between items-center">
-                        <span class="bg-slate-900 text-white text-xs px-2.5 py-1 rounded font-bold uppercase">Ejercicio 1: Cobb-Douglas</span>
-                        <span class="text-xs font-semibold text-rose-600">Dificultad: Alta</span>
-                    </div>
-                    <p class="text-sm text-slate-800 font-medium">
-                        Función $U(X,Y) = X \cdot Y^2$. Precios $P_x = 2$, $P_y = 4$. Ingreso $I = 120$. Determina $X^*$ y $Y^*$.
-                    </p>
-                    <details class="group bg-white border border-stone-300 rounded-lg p-4 text-xs space-y-3 cursor-pointer">
-                        <summary class="font-bold text-sky-700 flex justify-between items-center text-sm">
-                            <span>🔍 Ver Solución Paso a Paso</span>
-                            <span class="group-open:rotate-180 transition-transform">▼</span>
-                        </summary>
-                        <div class="pt-4 border-t border-stone-200 space-y-4 text-slate-700">
-                            <p><strong>Paso 1: Derivadas parciales</strong></p>
-                            <div class="overflow-x-auto text-center">$$UMg_x = Y^2 \quad , \quad UMg_y = 2XY$$</div>
-                            
-                            <p><strong>Paso 2: Condición de Tangencia</strong></p>
-                            <div class="overflow-x-auto text-center">
-                                $$\frac{Y^2}{2XY} = \frac{2}{4} \implies \frac{Y}{2X} = \frac{1}{2} \implies Y = X$$
-                            </div>
-                            
-                            <p><strong>Paso 3: Sustituir en RP</strong></p>
-                            <div class="overflow-x-auto text-center">
-                                $$120 = 2X + 4(X) \implies 120 = 6X \implies X^* = 20$$
-                            </div>
-                        </div>
-                    </details>
-                </div>
             </div>
         </section>
 
-        <!-- ================= SECTION 5: CHEAT SHEET ================= -->
+        <!-- SECTION 5: CHEAT SHEET -->
         <section id="sec-cheatsheet" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Cheat Sheet & Formulario</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
-                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Restricción Presupuestal</span>
-                        <div class="text-center pb-2">$$I = P_x X + P_y Y$$</div>
-                        <ul class="space-y-1 text-slate-300">
-                            <li>• Intercepto X: $I / P_x$</li>
-                            <li>• Pendiente: $-P_x / P_y$</li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 shadow-md">
-                        <span class="text-sky-400 font-bold text-sm block border-b border-slate-700 pb-1">Tangencia / Equilibrio</span>
-                        <div class="text-center pb-2">$$TMS = \frac{UMg_x}{UMg_y} = \frac{P_x}{P_y}$$</div>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- ================= SECTION 6: NOTICIAS ECONÓMICAS EN VIVO ================= -->
+        <!-- SECTION 6: NOTICIAS GLOBALES EN VIVO -->
         <section id="sec-noticias" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-4">
                 <div class="flex justify-between items-end border-b border-stone-200 pb-4">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                            📰 Monitor Económico Global
-                        </h2>
-                        <p class="text-sm text-slate-600 mt-1">
-                            Titulares actualizados desde la red de <strong>El Economista</strong> y portales financieros.
-                        </p>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">📰 Monitor Económico Global</h2>
+                        <p class="text-sm text-slate-600 mt-1">Titulares actualizados desde portales financieros internacionales.</p>
                     </div>
                     <button onclick="fetchNews()" class="text-sky-600 hover:text-sky-800 text-sm font-semibold flex items-center gap-1 transition">
                         🔄 Actualizar
                     </button>
                 </div>
                 
-                <!-- Contenedor Dinámico -->
                 <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 min-h-[300px]">
-                    <!-- Skeleton Loader inicial -->
                     <div class="bg-stone-100 rounded-xl h-32 pulse"></div>
                     <div class="bg-stone-100 rounded-xl h-32 pulse"></div>
                     <div class="bg-stone-100 rounded-xl h-32 pulse"></div>
@@ -402,7 +218,6 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Tab Switch Logic
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -423,13 +238,10 @@
             }
         }
 
-        // -------------------------
-        // NEWS API LOGIC
-        // -------------------------
+        // NEWS API LOGIC INTEGRATED
         let newsLoaded = false;
         async function fetchNews() {
             const container = document.getElementById('news-container');
-            // Show loading skeletons
             container.innerHTML = `
                 <div class="bg-stone-100 rounded-xl p-5 space-y-3 pulse border border-stone-200">
                     <div class="h-4 bg-stone-300 rounded w-3/4"></div>
@@ -446,31 +258,44 @@
             `;
             
             try {
-                // Usamos la API gratuita rss2json para saltar bloqueos de CORS leyendo el RSS de El Economista
-                const rssUrl = encodeURIComponent('https://www.eleconomista.es/rss/rss-economia.xml');
-                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&api_key=`;
+                const targetUrl = encodeURIComponent('https://news.google.com/rss/search?q=economia+mexico+finanzas&hl=es-419&gl=MX&ceid=MX:es-419');
+                const apiUrl = `https://api.allorigins.win/get?url=${targetUrl}`;
                 
                 const response = await fetch(apiUrl);
-                const data = await response.json();
+                if (!response.ok) throw new Error('Error en la red');
                 
-                if (data.status === 'ok') {
+                const data = await response.json();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+                const items = Array.from(xmlDoc.querySelectorAll("item")).slice(0, 9);
+                
+                if (items.length > 0) {
                     container.innerHTML = '';
-                    const articles = data.items.slice(0, 9); // Mostrar últimas 9 noticias
-                    
-                    articles.forEach(article => {
-                        // Formatear la fecha
-                        const dateObj = new Date(article.pubDate);
-                        const dateString = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute:'2-digit' });
+                    items.forEach(item => {
+                        const title = item.querySelector("title")?.textContent || 'Sin título';
+                        const link = item.querySelector("link")?.textContent || '#';
+                        const pubDate = item.querySelector("pubDate")?.textContent;
+                        
+                        let cleanTitle = title;
+                        let source = "NOTICIA ECONÓMICA";
+                        if (title.includes(" - ")) {
+                            const parts = title.split(" - ");
+                            source = parts.pop();
+                            cleanTitle = parts.join(" - ");
+                        }
+
+                        const dateObj = new Date(pubDate);
+                        const dateString = dateObj.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute:'2-digit' });
 
                         const card = document.createElement('a');
-                        card.href = article.link;
+                        card.href = link;
                         card.target = '_blank';
                         card.className = "block bg-white hover:bg-stone-50 border border-stone-200 rounded-xl p-5 transition-shadow hover:shadow-md hover:border-sky-300 group flex flex-col justify-between";
                         
                         card.innerHTML = `
                             <div>
-                                <span class="text-[10px] font-bold text-sky-600 uppercase tracking-wider mb-2 block">EL ECONOMISTA</span>
-                                <h3 class="text-sm font-bold text-slate-900 leading-snug group-hover:text-sky-700 transition-colors">${article.title}</h3>
+                                <span class="text-[10px] font-bold text-sky-600 uppercase tracking-wider mb-2 block">${source}</span>
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug group-hover:text-sky-700 transition-colors">${cleanTitle}</h3>
                             </div>
                             <div class="mt-4 flex items-center justify-between border-t border-stone-100 pt-3">
                                 <span class="text-[11px] text-slate-500 font-medium">🕒 ${dateString}</span>
@@ -481,7 +306,7 @@
                     });
                     newsLoaded = true;
                 } else {
-                    throw new Error("Error en el formato del feed");
+                    throw new Error("No items");
                 }
             } catch (error) {
                 container.innerHTML = `
@@ -492,17 +317,13 @@
             }
         }
 
-        // -------------------------
         // CHART LOGIC
-        // -------------------------
         let chartInstance = null;
-
         function calculateOptimum(I, Px, Py) {
             const Xstar = I / (2 * Px);
             const Ystar = I / (2 * Py);
             const Ustar = Xstar * Ystar;
-            const slope = -(Px / Py);
-            return { Xstar, Ystar, Ustar, slope };
+            return { Xstar, Ystar, Ustar };
         }
 
         function generateChartData(I, Px, Py) {
@@ -536,12 +357,6 @@
             document.getElementById('val-Px').textContent = '$' + Px;
             document.getElementById('val-Py').textContent = '$' + Py;
 
-            const { Xstar, Ystar, Ustar, slope } = calculateOptimum(I, Px, Py);
-
-            document.getElementById('res-Xstar').textContent = Xstar.toFixed(2);
-            document.getElementById('res-Ystar').textContent = Ystar.toFixed(2);
-            document.getElementById('res-Ustar').textContent = Ustar.toFixed(2);
-
             if (chartInstance) {
                 const data = generateChartData(I, Px, Py);
                 chartInstance.data.datasets[0].data = data.budgetPoints;
@@ -556,7 +371,6 @@
             const I = parseFloat(document.getElementById('slider-I').value);
             const Px = parseFloat(document.getElementById('slider-Px').value);
             const Py = parseFloat(document.getElementById('slider-Py').value);
-
             const initialData = generateChartData(I, Px, Py);
 
             chartInstance = new Chart(ctx, {
