@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Class & Simulador: Microeconomía y Noticias Globales</title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- MathJax CDN para renderizar ecuaciones matemáticas reales -->
     <script>
         window.MathJax = {
             tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
@@ -21,45 +17,23 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 380px;
-            }
-        }
-        .pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .chart-container { position: relative; width: 100%; max-width: 650px; margin: 0 auto; height: 320px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 380px; } }
+        .pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        /* Animación suave para los acordeones de trampas */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body class="bg-[#faf8f5] text-slate-800 font-sans antialiased leading-relaxed min-h-screen flex flex-col">
 
-    <!-- Top Header -->
     <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div class="flex items-center space-x-3 shrink-0">
-                <div class="w-9 h-9 rounded-lg bg-sky-600 flex items-center justify-center font-bold text-lg text-white shadow">
-                    µE
-                </div>
+                <div class="w-9 h-9 rounded-lg bg-sky-600 flex items-center justify-center font-bold text-lg text-white shadow">µE</div>
                 <div>
                     <h1 class="text-lg font-bold tracking-tight text-white leading-tight">Master Class & Simulador</h1>
                     <p class="text-xs text-sky-400 font-medium">Microeconomía Analítica + Actualidad</p>
@@ -67,66 +41,206 @@
             </div>
             
             <nav class="flex overflow-x-auto no-scrollbar gap-1 text-xs md:text-sm font-medium pb-1 md:pb-0">
-                <button onclick="switchTab('teoria')" id="tab-teoria" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md bg-sky-600 text-white transition">
-                    📖 Teoría y Trampas
-                </button>
-                <button onclick="switchTab('simulador')" id="tab-simulador" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
-                    📊 Graficador
-                </button>
-                <button onclick="switchTab('equimarginal')" id="tab-equimarginal" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
-                    🧮 Equimarginal
-                </button>
-                <button onclick="switchTab('ejercicios')" id="tab-ejercicios" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
-                    ⚔️ Ejercicios
-                </button>
-                <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">
-                    ⚡ Cheat Sheet
-                </button>
-                <button onclick="switchTab('noticias')" id="tab-noticias" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition border border-sky-500/30">
-                    🌍 Noticias Globales
-                </button>
+                <button onclick="switchTab('teoria')" id="tab-teoria" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md bg-sky-600 text-white transition">📖 Teoría y Trampas</button>
+                <button onclick="switchTab('simulador')" id="tab-simulador" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">📊 Graficador</button>
+                <button onclick="switchTab('equimarginal')" id="tab-equimarginal" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">🧮 Equimarginal</button>
+                <button onclick="switchTab('ejercicios')" id="tab-ejercicios" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">⚔️ Ejercicios</button>
+                <button onclick="switchTab('cheatsheet')" id="tab-cheatsheet" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition">⚡ Cheat Sheet</button>
+                <button onclick="switchTab('noticias')" id="tab-noticias" class="tab-btn whitespace-nowrap px-3 py-1.5 rounded-md hover:bg-slate-800 text-slate-300 transition border border-sky-500/30">🌍 Noticias Globales</button>
             </nav>
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- SECTION 1: TEORÍA -->
+        <!-- ================= SECTION 1: TEORÍA AVANZADA (REESTRUCTURADA Y EXPANDIDA) ================= -->
         <section id="sec-teoria" class="tab-content block space-y-8">
             <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-sky-950 rounded-2xl p-6 text-white shadow-lg border border-slate-700">
-                <h2 class="text-2xl font-bold text-sky-400 mb-2">Unidad I y II: Dominio Teórico & Análisis Técnico</h2>
+                <h2 class="text-2xl font-bold text-sky-400 mb-2">Dominio Teórico & Análisis Técnico</h2>
                 <p class="text-sm text-slate-300 leading-relaxed max-w-4xl">
-                    Esta sección desglosa minuciosamente cada punto del temario oficial, incorporando el rigor conceptual, las deducciones lógicas y las <strong>preguntas trampa</strong> más recurrentes en exámenes de nivel universitario.
+                    Desglose riguroso del temario de Microeconomía. Esta sección está diseñada con enfoque analítico para ingeniería, abarcando desde los axiomas fundamentales hasta las <strong>preguntas trampa</strong> más letales en exámenes departamentales.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4">
-                    <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
-                        <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                        <span>1.1 Principios y Fundamentos Económicos</span>
+            <!-- UNIDAD I -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-extrabold text-slate-900 border-b-2 border-sky-600 pb-2 inline-block">Unidad I: Fundamentos Económicos</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Tema 1.1 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4 hover:shadow-md transition">
+                        <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
+                            <span class="w-2 h-2 rounded-full bg-sky-600"></span>
+                            <span>1.1 Escasez, Elección y Costo de Oportunidad</span>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            La economía optimiza la asignación de recursos <strong>escasos</strong> ante necesidades <strong>ilimitadas</strong>. Toda elección implica un sacrificio.
+                        </p>
+                        <div class="bg-stone-50 p-4 rounded-lg border-l-4 border-amber-500 text-sm">
+                            <strong class="text-slate-900 block mb-1">Costo de Oportunidad:</strong>
+                            No es la suma de todas las alternativas rechazadas, sino <em>el valor de la mejor alternativa específica a la que se renuncia</em>. Si decides estudiar 2 horas en lugar de trabajar ganando $200 MXN o dormir, tu costo de oportunidad son los $200 MXN (asumiendo que era tu mejor segunda opción).
+                        </div>
+                        <details class="group bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm cursor-pointer">
+                            <summary class="font-bold text-amber-900 flex justify-between items-center">
+                                <span>⚠️ Trampa de Examen: Economía Positiva vs Normativa</span>
+                                <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <div class="mt-3 text-slate-700 text-xs leading-relaxed space-y-2 border-t border-amber-200 pt-2">
+                                <p><strong>Positiva (Lo que es):</strong> Afirmaciones objetivas y comprobables. <em>Ej: "Un aumento del 10% en el salario mínimo elevó el desempleo un 2%".</em></p>
+                                <p><strong>Normativa (Lo que debería ser):</strong> Involucra juicios de valor o ética. <em>Ej: "El gobierno <strong>debe</strong> subir los impuestos a los ricos por justicia social".</em> Las palabras clave son "debería", "justo", "mejor".</p>
+                            </div>
+                        </details>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900">La Ciencia Económica, Escasez y Juicios de Valor</h3>
-                    <p class="text-sm text-slate-600">
-                        La economía es la ciencia social que estudia la asignación eficiente de recursos <strong>escasos</strong> para satisfacer necesidades humanas <strong>ilimitadas</strong>.
-                    </p>
+
+                    <!-- Tema 1.2 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4 hover:shadow-md transition">
+                        <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
+                            <span class="w-2 h-2 rounded-full bg-sky-600"></span>
+                            <span>1.2 Frontera de Posibilidades de Producción (FPP)</span>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            Modelo que ilustra la producción máxima de dos bienes con recursos y tecnología dados (Ceteris Paribus).
+                        </p>
+                        <ul class="text-sm text-slate-700 space-y-1 ml-4 list-disc marker:text-sky-500">
+                            <li><strong>Puntos sobre la curva:</strong> Eficiencia técnica (se usan todos los recursos).</li>
+                            <li><strong>Puntos dentro de la curva:</strong> Ineficiencia o desempleo de recursos.</li>
+                            <li><strong>Puntos fuera de la curva:</strong> Inalcanzables actualmente.</li>
+                        </ul>
+                        <details class="group bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm cursor-pointer">
+                            <summary class="font-bold text-amber-900 flex justify-between items-center">
+                                <span>⚠️ Trampa de Examen: Concavidad de la FPP</span>
+                                <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <div class="mt-3 text-slate-700 text-xs leading-relaxed border-t border-amber-200 pt-2">
+                                <p>Te preguntarán por qué la curva es cóncava (abombada hacia afuera) y no una línea recta. La respuesta correcta es la <strong>Ley de los Costos de Oportunidad Crecientes</strong>: los factores de producción (trabajadores, tierras, máquinas) no son perfectamente adaptables a todos los bienes. Al trasladar recursos de la agricultura a la tecnología, cada vez cuesta más producir una unidad extra de tecnología.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-4">
-                    <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase">
-                        <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
-                        <span>1.2 Sistemas y Modelos</span>
+                <!-- Estructuras de Mercado (Tabla) -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5">
+                    <div class="flex items-center space-x-2 text-sky-700 font-bold text-sm tracking-wide uppercase mb-4">
+                        <span class="w-2 h-2 rounded-full bg-sky-600"></span>
+                        <span>1.3 Estructuras de Mercado</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900">Sistemas Económicos y la FPP Concava</h3>
-                    <p class="text-sm text-slate-600">
-                        La sociedad responde al <em>¿Qué, Cómo y Para quién producir?</em> mediante economías de Mercado, Centralizadas o Mixtas.
-                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-800 border-b-2 border-slate-300">
+                                    <th class="p-3 font-bold">Estructura</th>
+                                    <th class="p-3 font-bold">Nº Vendedores</th>
+                                    <th class="p-3 font-bold">Tipo de Producto</th>
+                                    <th class="p-3 font-bold">Barreras de Entrada</th>
+                                    <th class="p-3 font-bold">Poder de Mercado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr class="hover:bg-sky-50 transition">
+                                    <td class="p-3 font-semibold text-emerald-700">Comp. Perfecta</td>
+                                    <td class="p-3">Muchísimos</td>
+                                    <td class="p-3">Homogéneo (Idéntico)</td>
+                                    <td class="p-3">Nulas</td>
+                                    <td class="p-3">Nulo (Precio-aceptantes)</td>
+                                </tr>
+                                <tr class="hover:bg-sky-50 transition">
+                                    <td class="p-3 font-semibold text-sky-700">Comp. Monopolística</td>
+                                    <td class="p-3">Muchos</td>
+                                    <td class="p-3">Diferenciado (Marcas)</td>
+                                    <td class="p-3">Bajas</td>
+                                    <td class="p-3">Bajo/Medio</td>
+                                </tr>
+                                <tr class="hover:bg-sky-50 transition">
+                                    <td class="p-3 font-semibold text-amber-600">Oligopolio</td>
+                                    <td class="p-3">Pocos (Dominantes)</td>
+                                    <td class="p-3">Homogéneo o Diferenciado</td>
+                                    <td class="p-3">Altas</td>
+                                    <td class="p-3">Alto (Interdependencia)</td>
+                                </tr>
+                                <tr class="hover:bg-sky-50 transition">
+                                    <td class="p-3 font-semibold text-rose-600">Monopolio</td>
+                                    <td class="p-3">Único</td>
+                                    <td class="p-3">Sin sustitutos cercanos</td>
+                                    <td class="p-3">Muy Altas / Bloqueadas</td>
+                                    <td class="p-3">Absoluto (Fijador de precio)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIDAD II -->
+            <div class="space-y-4 pt-6">
+                <h3 class="text-xl font-extrabold text-slate-900 border-b-2 border-sky-600 pb-2 inline-block">Unidad II: Teoría del Consumidor</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Axiomas -->
+                    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-3">
+                        <strong class="text-sky-800 block text-lg font-bold border-b border-stone-100 pb-2">2.1 Axiomas de Preferencia</strong>
+                        <p class="text-xs text-slate-500 mb-2">Requisitos matemáticos para que un consumidor sea considerado "racional":</p>
+                        <ul class="text-sm text-slate-700 space-y-3">
+                            <li><span class="font-bold text-slate-900">Completitud:</span> Puede clasificar todas las cestas. O prefiere $A \succ B$, o $B \succ A$, o es indiferente $A \sim B$.</li>
+                            <li><span class="font-bold text-slate-900">Transitividad:</span> Si prefiere $A \succ B$ y $B \succ C$, lógicamente debe preferir $A \succ C$. Evita bucles infinitos.</li>
+                            <li><span class="font-bold text-slate-900">No Saciedad (Monotonicidad):</span> Más es mejor. Una cesta con estrictamente más bienes siempre aportará mayor utilidad.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Curvas de Indiferencia -->
+                    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-3">
+                        <strong class="text-sky-800 block text-lg font-bold border-b border-stone-100 pb-2">2.2 Curvas de Indiferencia (CI)</strong>
+                        <p class="text-xs text-slate-500 mb-2">Mapa topológico de la utilidad $U(X,Y)$. Sus propiedades nacen de los axiomas:</p>
+                        <ul class="text-sm text-slate-700 space-y-2">
+                            <li><strong>Pendiente Negativa:</strong> Por el axioma de no saciedad. Para mantener la misma $U$, si sube $X$, debe bajar $Y$.</li>
+                            <li><strong>Convexas al origen:</strong> Refleja que la Tasa Marginal de Sustitución ($TMS$) es decreciente. Preferimos cestas equilibradas a extremas.</li>
+                            <li><strong>¡Nunca se cruzan!:</strong> Violaría el axioma de transitividad. Es matemáticamente imposible.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Restricción Presupuestaria -->
+                    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5 space-y-3">
+                        <strong class="text-sky-800 block text-lg font-bold border-b border-stone-100 pb-2">2.3 La Recta Presupuestaria</strong>
+                        <div class="bg-slate-100 text-center py-2 rounded font-mono font-bold text-slate-800 mb-2">
+                            $$I = P_xX + P_yY$$
+                        </div>
+                        <p class="text-sm text-slate-700">La pendiente es el costo de oportunidad del mercado: $-P_x/P_y$.</p>
+                        <details class="group bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm cursor-pointer mt-2">
+                            <summary class="font-bold text-amber-900 flex justify-between items-center text-xs">
+                                <span>⚠️ Trampa: Rotación vs Desplazamiento</span>
+                                <span class="text-amber-700 group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <div class="mt-2 text-slate-700 text-xs leading-relaxed border-t border-amber-200 pt-2">
+                                <p><strong>Si cambia el Ingreso ($I$):</strong> La recta se <em>desplaza</em> paralelamente. La pendiente no cambia.</p>
+                                <p><strong>Si cambia un Precio ($P_x$ o $P_y$):</strong> La recta <em>rota</em> sobre el eje del bien cuyo precio NO cambió.</p>
+                                <p class="font-bold text-rose-700 mt-1">Trampa Mortal: Si el ingreso y AMBOS precios se duplican, la recta NO se mueve. El ingreso real permanece idéntico.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Matemáticas del Equilibrio -->
+                <div class="bg-sky-50/70 rounded-xl p-6 border border-sky-200">
+                    <h4 class="text-lg font-bold text-sky-950 mb-4">2.4 Condición Matemática de Equilibrio (Maximización)</h4>
+                    <p class="text-sm text-slate-700 mb-4">El consumidor maximiza su utilidad sujetándose a su presupuesto justo en el punto de tangencia donde la pendiente de la Curva de Indiferencia iguala a la pendiente de la Recta Presupuestaria.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded border border-sky-100 shadow-sm text-center">
+                            <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tasa Marginal de Sustitución</span>
+                            <div class="overflow-x-auto">
+                                $$TMS_{x,y} = \frac{\partial U / \partial X}{\partial U / \partial Y} = \frac{UMg_x}{UMg_y}$$
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-sky-100 shadow-sm text-center">
+                            <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Principio Equimarginal (Lagrange)</span>
+                            <div class="overflow-x-auto">
+                                $$\frac{UMg_x}{P_x} = \frac{UMg_y}{P_y}$$
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: GRAFICADOR -->
+        <!-- ================= SECTION 2: GRAFICADOR ================= -->
         <section id="sec-simulador" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-4">
                 <h2 class="text-2xl font-bold text-slate-900">Graficador Interactivo del Equilibrio del Consumidor</h2>
@@ -164,30 +278,34 @@
             </div>
         </section>
 
-        <!-- SECTION 3: EQUIMARGINAL -->
+        <!-- ================= SECTION 3: EQUIMARGINAL ================= -->
         <section id="sec-equimarginal" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-5">
                 <h2 class="text-2xl font-bold text-slate-900">Calculadora del Principio Equimarginal</h2>
                 <p class="text-sm text-slate-600">Simula cómo se maximiza la utilidad peso a peso.</p>
+                <div class="bg-slate-900 text-white p-5 rounded-xl shadow-md space-y-4">
+                    <h3 class="text-lg font-bold text-sky-400 border-b border-slate-700 pb-2">Secuencia Óptima de Compra</h3>
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-xs">
+                        <p class="text-slate-200">
+                            Condición cumplida: $$\frac{UMg_x}{P_x} = \frac{30}{15} = 2.0 = \frac{30}{10} = \frac{UMg_y}{P_y}$$
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECTION 4: EJERCICIOS -->
+        <!-- ================= SECTION 4: EJERCICIOS ================= -->
         <section id="sec-ejercicios" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Banco de Ejercicios Nivel Examen</h2>
                 
-                <!-- CONSEJO DE ESTUDIO AÑADIDO -->
                 <div class="bg-sky-50 border-l-4 border-sky-600 p-5 rounded-r-xl shadow-sm space-y-2">
-                    <h3 class="text-sky-900 font-bold text-sm flex items-center gap-2">
-                        💡 Consejo de Estudio
-                    </h3>
+                    <h3 class="text-sky-900 font-bold text-sm flex items-center gap-2">💡 Consejo de Estudio</h3>
                     <p class="text-sm text-slate-700 leading-relaxed">
                         Los ejercicios 3 y 4 en especial, abordan la parte matemática y analítica que los profesores suelen incluir en los exámenes parciales de microeconomía para evaluar el "Comportamiento del Consumidor". Te recomiendo copiar los pasos del ejercicio 4 en papel unas cuantas veces, ya que comprender el equilibrio del consumidor igualando la utilidad marginal por peso ($UMg/P$) es clave para garantizar una calificación excelente. ¡Mucho éxito en tu estudio y en el examen!
                     </p>
                 </div>
 
-                <!-- Ejercicio 1 -->
                 <div class="border border-stone-200 rounded-xl p-5 space-y-3 bg-stone-50/50">
                     <div class="flex justify-between items-center">
                         <span class="bg-slate-900 text-white text-xs px-2.5 py-1 rounded font-bold uppercase">Ejercicio 1: Cobb-Douglas</span>
@@ -204,12 +322,10 @@
                         <div class="pt-4 border-t border-stone-200 space-y-4 text-slate-700">
                             <p><strong>Paso 1: Derivadas parciales</strong></p>
                             <div class="overflow-x-auto text-center">$$UMg_x = Y^2 \quad , \quad UMg_y = 2XY$$</div>
-                            
                             <p><strong>Paso 2: Condición de Tangencia</strong></p>
                             <div class="overflow-x-auto text-center">
                                 $$\frac{Y^2}{2XY} = \frac{2}{4} \implies \frac{Y}{2X} = \frac{1}{2} \implies Y = X$$
                             </div>
-                            
                             <p><strong>Paso 3: Sustituir en RP</strong></p>
                             <div class="overflow-x-auto text-center">
                                 $$120 = 2X + 4(X) \implies 120 = 6X \implies X^* = 20$$
@@ -218,32 +334,29 @@
                     </details>
                 </div>
 
-                <!-- Contenedores preparados para Ejercicio 3 y 4 -->
                 <div id="ejercicio-3-placeholder" class="border border-dashed border-stone-300 rounded-xl p-5 text-center text-stone-500 text-sm">
                     <em>[Espacio reservado para el Ejercicio 3: Esperando datos...]</em>
                 </div>
-
                 <div id="ejercicio-4-placeholder" class="border border-dashed border-stone-300 rounded-xl p-5 text-center text-stone-500 text-sm">
                     <em>[Espacio reservado para el Ejercicio 4: Esperando datos...]</em>
                 </div>
-
             </div>
         </section>
 
-        <!-- SECTION 5: CHEAT SHEET -->
+        <!-- ================= SECTION 5: CHEAT SHEET ================= -->
         <section id="sec-cheatsheet" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Cheat Sheet & Formulario</h2>
             </div>
         </section>
 
-        <!-- SECTION 6: NOTICIAS GLOBALES EN VIVO -->
+        <!-- ================= SECTION 6: NOTICIAS GLOBALES (CORREGIDAS A HOY) ================= -->
         <section id="sec-noticias" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-4">
                 <div class="flex justify-between items-end border-b border-stone-200 pb-4">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">📰 Monitor Económico Global</h2>
-                        <p class="text-sm text-slate-600 mt-1">Titulares actualizados desde portales financieros internacionales.</p>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">📰 Monitor Económico Global (Noticias del Día)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Titulares actualizados de las últimas 24 horas sobre finanzas y economía.</p>
                     </div>
                     <button onclick="fetchNews()" class="text-sky-600 hover:text-sky-800 text-sm font-semibold flex items-center gap-1 transition">
                         🔄 Actualizar
@@ -260,10 +373,9 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 text-xs py-5 border-t border-slate-800 text-center">
         <div class="max-w-7xl mx-auto px-4">
-            Plataforma de Estudio Intensivo para Microeconomía y Fundamentos • Con API de Noticias
+            Plataforma de Estudio Intensivo para Microeconomía (ESCOM IPN) • Con API de Noticias
         </div>
     </footer>
 
@@ -289,7 +401,7 @@
             }
         }
 
-        // NEWS API LOGIC INTEGRATED
+        // NEWS API LOGIC INTEGRATED (MODIFICADO PARA OBTENER NOTICIAS DE LAS ÚLTIMAS 24 HORAS)
         let newsLoaded = false;
         async function fetchNews() {
             const container = document.getElementById('news-container');
@@ -309,7 +421,8 @@
             `;
             
             try {
-                const rssUrl = encodeURIComponent('https://news.google.com/rss/search?q=economia+finanzas+mexico&hl=es-419&gl=MX&ceid=MX:es-419');
+                // El parámetro +when:1d restringe la búsqueda a las últimas 24 horas para garantizar noticias frescas
+                const rssUrl = encodeURIComponent('https://news.google.com/rss/search?q=economia+finanzas+mexico+when:1d&hl=es-419&gl=MX&ceid=MX:es-419');
                 const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
                 
                 const response = await fetch(apiUrl);
@@ -356,7 +469,7 @@
                 console.error("Error obteniendo noticias:", error);
                 container.innerHTML = `
                     <div class="col-span-full p-4 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-sm font-semibold text-center">
-                        No se pudieron cargar las noticias en este momento. Intenta actualizar más tarde.
+                        No se pudieron cargar las noticias recientes en este momento. Intenta actualizar más tarde.
                     </div>
                 `;
             }
