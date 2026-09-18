@@ -176,6 +176,57 @@
         <section id="sec-ejercicios" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Banco de Ejercicios Nivel Examen</h2>
+                
+                <!-- CONSEJO DE ESTUDIO AÑADIDO -->
+                <div class="bg-sky-50 border-l-4 border-sky-600 p-5 rounded-r-xl shadow-sm space-y-2">
+                    <h3 class="text-sky-900 font-bold text-sm flex items-center gap-2">
+                        💡 Consejo de Estudio
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Los ejercicios 3 y 4 en especial, abordan la parte matemática y analítica que los profesores suelen incluir en los exámenes parciales de microeconomía para evaluar el "Comportamiento del Consumidor". Te recomiendo copiar los pasos del ejercicio 4 en papel unas cuantas veces, ya que comprender el equilibrio del consumidor igualando la utilidad marginal por peso ($UMg/P$) es clave para garantizar una calificación excelente. ¡Mucho éxito en tu estudio y en el examen!
+                    </p>
+                </div>
+
+                <!-- Ejercicio 1 -->
+                <div class="border border-stone-200 rounded-xl p-5 space-y-3 bg-stone-50/50">
+                    <div class="flex justify-between items-center">
+                        <span class="bg-slate-900 text-white text-xs px-2.5 py-1 rounded font-bold uppercase">Ejercicio 1: Cobb-Douglas</span>
+                        <span class="text-xs font-semibold text-rose-600">Dificultad: Alta</span>
+                    </div>
+                    <p class="text-sm text-slate-800 font-medium">
+                        Función $U(X,Y) = X \cdot Y^2$. Precios $P_x = 2$, $P_y = 4$. Ingreso $I = 120$. Determina $X^*$ y $Y^*$.
+                    </p>
+                    <details class="group bg-white border border-stone-300 rounded-lg p-4 text-xs space-y-3 cursor-pointer">
+                        <summary class="font-bold text-sky-700 flex justify-between items-center text-sm">
+                            <span>🔍 Ver Solución Paso a Paso</span>
+                            <span class="group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div class="pt-4 border-t border-stone-200 space-y-4 text-slate-700">
+                            <p><strong>Paso 1: Derivadas parciales</strong></p>
+                            <div class="overflow-x-auto text-center">$$UMg_x = Y^2 \quad , \quad UMg_y = 2XY$$</div>
+                            
+                            <p><strong>Paso 2: Condición de Tangencia</strong></p>
+                            <div class="overflow-x-auto text-center">
+                                $$\frac{Y^2}{2XY} = \frac{2}{4} \implies \frac{Y}{2X} = \frac{1}{2} \implies Y = X$$
+                            </div>
+                            
+                            <p><strong>Paso 3: Sustituir en RP</strong></p>
+                            <div class="overflow-x-auto text-center">
+                                $$120 = 2X + 4(X) \implies 120 = 6X \implies X^* = 20$$
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Contenedores preparados para Ejercicio 3 y 4 -->
+                <div id="ejercicio-3-placeholder" class="border border-dashed border-stone-300 rounded-xl p-5 text-center text-stone-500 text-sm">
+                    <em>[Espacio reservado para el Ejercicio 3: Esperando datos...]</em>
+                </div>
+
+                <div id="ejercicio-4-placeholder" class="border border-dashed border-stone-300 rounded-xl p-5 text-center text-stone-500 text-sm">
+                    <em>[Espacio reservado para el Ejercicio 4: Esperando datos...]</em>
+                </div>
+
             </div>
         </section>
 
@@ -258,37 +309,30 @@
             `;
             
             try {
-                const targetUrl = encodeURIComponent('https://news.google.com/rss/search?q=economia+mexico+finanzas&hl=es-419&gl=MX&ceid=MX:es-419');
-                const apiUrl = `https://api.allorigins.win/get?url=${targetUrl}`;
+                const rssUrl = encodeURIComponent('https://news.google.com/rss/search?q=economia+finanzas+mexico&hl=es-419&gl=MX&ceid=MX:es-419');
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
                 
                 const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error('Error en la red');
-                
                 const data = await response.json();
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(data.contents, "text/xml");
-                const items = Array.from(xmlDoc.querySelectorAll("item")).slice(0, 9);
                 
-                if (items.length > 0) {
+                if (data.status === 'ok' && data.items && data.items.length > 0) {
                     container.innerHTML = '';
-                    items.forEach(item => {
-                        const title = item.querySelector("title")?.textContent || 'Sin título';
-                        const link = item.querySelector("link")?.textContent || '#';
-                        const pubDate = item.querySelector("pubDate")?.textContent;
-                        
-                        let cleanTitle = title;
+                    const articles = data.items.slice(0, 9);
+                    
+                    articles.forEach(article => {
+                        let cleanTitle = article.title;
                         let source = "NOTICIA ECONÓMICA";
-                        if (title.includes(" - ")) {
-                            const parts = title.split(" - ");
+                        if (cleanTitle.includes(" - ")) {
+                            const parts = cleanTitle.split(" - ");
                             source = parts.pop();
                             cleanTitle = parts.join(" - ");
                         }
 
-                        const dateObj = new Date(pubDate);
+                        const dateObj = new Date(article.pubDate);
                         const dateString = dateObj.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute:'2-digit' });
 
                         const card = document.createElement('a');
-                        card.href = link;
+                        card.href = article.link;
                         card.target = '_blank';
                         card.className = "block bg-white hover:bg-stone-50 border border-stone-200 rounded-xl p-5 transition-shadow hover:shadow-md hover:border-sky-300 group flex flex-col justify-between";
                         
@@ -306,9 +350,10 @@
                     });
                     newsLoaded = true;
                 } else {
-                    throw new Error("No items");
+                    throw new Error("Formato inválido o vacío retornado por la API");
                 }
             } catch (error) {
+                console.error("Error obteniendo noticias:", error);
                 container.innerHTML = `
                     <div class="col-span-full p-4 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-sm font-semibold text-center">
                         No se pudieron cargar las noticias en este momento. Intenta actualizar más tarde.
